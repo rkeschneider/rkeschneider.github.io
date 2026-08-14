@@ -1,0 +1,5 @@
+node_modules/
+node_modules.zip
+package-lock.json
+temporary screenshots/
+.DS_Store

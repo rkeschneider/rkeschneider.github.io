@@ -1,0 +1,17 @@
+{
+  "name": "Rachel Schneider — Personal Site",
+  "base": "Organic",
+  "colors": {
+    "bg": "#f5ead8",
+    "surface": "#ebddc5",
+    "text": "#201e1d",
+    "accent": "#72919d",
+    "accent2": "#939c73"
+  },
+  "fonts": {
+    "heading": "Caprasimo",
+    "body": "Figtree"
+  },
+  "radius": { "sm": 8, "md": 16, "lg": 28 },
+  "notes": "Accent (slate blue-grey) and accent-2 (olive) were sampled from Rachel's business card. Background, surface, text, type, spacing, and components are inherited from the Organic design system unchanged."
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Rachel Schneider</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────── -->
+  <header class="site-header hero-mode" id="site-header">
+    <a class="brand" href="index.html">Rachel Schneider</a>
+    <nav aria-label="Main">
+      <ul class="site-nav" id="site-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="resume.html" aria-current="page">Resume</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="currentColor" aria-hidden="true">
+        <rect width="22" height="2" rx="1"/>
+        <rect y="7" width="22" height="2" rx="1"/>
+        <rect y="14" width="22" height="2" rx="1"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ── Page Header ────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <h1>Resume</h1>
+      <p class="sub">Professional Experience &amp; Education</p>
+    </div>
+  </div>
+
+  <!-- ── Resume embed ───────────────────────────────────── -->
+  <section class="section">
+    <div class="section-inner--wide">
+      <div class="resume-toolbar">
+        <div>
+          <p class="section-eyebrow" style="margin-bottom: 0.3rem;">Document</p>
+          <h2 class="section-heading" style="margin: 0; font-size: 1.5rem;">Rachel Schneider — Resume</h2>
+        </div>
+        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="btn btn-primary">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0">
+            <path d="M7.5 10.5L3 6H6V1H9V6H12L7.5 10.5Z" fill="currentColor"/>
+            <path d="M2 12H13V14H2V12Z" fill="currentColor"/>
+          </svg>
+          Download PDF
+        </a>
+      </div>
+      <iframe
+        class="resume-embed"
+        src="assets/rachel-schneider-resume.pdf"
+        title="Rachel Schneider Resume"
+        aria-label="Resume PDF viewer">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="footer-brand">Rachel Schneider</span>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="work.html">Work</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+    <p class="footer-copy">Victoria, BC &nbsp;·&nbsp; <a href="mailto:rkeschneider@gmail.com">rkeschneider@gmail.com</a></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
