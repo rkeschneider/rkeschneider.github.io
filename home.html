@@ -4,119 +4,607 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rachel Schneider — Policy Analyst &amp; Researcher</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+
+    /* ── Palette ──────────────────────────────────────────── */
+    :root {
+      --slate:       #72919d;
+      --slate-dark:  #5c7882;
+      --slate-deep:  #3f5760;
+      --cream:       #f5ead8;
+      --cream-dim:   rgba(245,234,216,0.72);
+      --cream-faint: rgba(245,234,216,0.12);
+      --olive:       #939c73;
+      --olive-dark:  #747a59;
+      --text-dark:   #1e2a2e;
+      --radius:      20px;
+      --nav-h:       64px;
+    }
+
+    /* ── Reset & base ─────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--slate);
+      color: var(--cream);
+      font-family: 'Figtree', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── Shared typography ────────────────────────────────── */
+    .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .heading {
+      font-family: 'Caprasimo', Georgia, serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Shared buttons ───────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.7rem;
+      border-radius: 999px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-cream {
+      background: var(--cream);
+      color: var(--slate-deep);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 1.5px solid rgba(245,234,216,0.4);
+    }
+    .btn-outline:hover { border-color: var(--cream); }
+
+    .btn-dark {
+      background: var(--slate-deep);
+      color: var(--cream);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       STICKY NAV
+       ══════════════════════════════════════════════════════ */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate);
+      border-bottom: 1px solid rgba(245,234,216,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      height: var(--nav-h);
+    }
+
+    .nav-brand {
+      font-family: 'Caprasimo', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.2rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .nav-links a:hover { color: var(--cream); }
+
+
+    /* ══════════════════════════════════════════════════════
+       1. HERO
+       ══════════════════════════════════════════════════════ */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - var(--nav-h));
+      background: var(--slate);
+      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 5rem);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    /* Photo lives in a tall portrait card */
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero-photo-card {
+      width: 100%;
+      max-width: 420px;
+      /* Tall portrait frame — shows face & shoulders comfortably */
+      aspect-ratio: 3 / 4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(30,42,46,0.4);
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Move down slightly so face (not hair) is centred */
+      object-position: center 18%;
+      display: block;
+    }
+
+    /* Text side */
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-family: 'Caprasimo', Georgia, serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      line-height: 1.0;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--cream-dim);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       2. ORGANIZATIONS STRIP
+       ══════════════════════════════════════════════════════ */
+    .orgs {
+      background: var(--slate-deep);
+      padding: 3.5rem clamp(2rem, 8vw, 6rem);
+    }
+
+    .orgs .label { text-align: center; margin-bottom: 2rem; }
+
+    .orgs-grid {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .org-card {
+      background: var(--cream-faint);
+      border: 1px solid rgba(245,234,216,0.18);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      text-decoration: none;
+      color: var(--cream);
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      max-width: 270px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .org-card:hover { background: rgba(245,234,216,0.18); transform: translateY(-3px); }
+
+    .org-name {
+      font-family: 'Caprasimo', serif;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .org-role {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       3. ABOUT ME
+       ══════════════════════════════════════════════════════ */
+    .about {
+      background: var(--slate);
+      padding: 6rem clamp(2rem, 8vw, 6rem);
+    }
+
+    .about-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      box-shadow: 0 20px 56px rgba(30,42,46,0.45);
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.78;
+      color: var(--cream-dim);
+      margin-bottom: 1.1rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(245,234,216,0.3);
+      color: var(--cream);
+    }
+    .tag-olive { border-color: var(--olive); color: var(--olive); }
+
+
+    /* ══════════════════════════════════════════════════════
+       4. WORKS & PUBLICATIONS
+       ══════════════════════════════════════════════════════ */
+    .works {
+      background: var(--olive-dark);
+      padding: 6rem clamp(2rem, 8vw, 6rem);
+    }
+
+    .works-inner { max-width: 1000px; margin: 0 auto; }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .work-card {
+      background: rgba(245,234,216,0.1);
+      border: 1px solid rgba(245,234,216,0.18);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: background 0.2s;
+    }
+    .work-card:hover { background: rgba(245,234,216,0.15); }
+
+    .work-type {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.55;
+    }
+
+    .work-title {
+      font-family: 'Caprasimo', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--cream);
+    }
+
+    .work-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--cream-dim);
+      flex: 1;
+    }
+
+    .work-meta {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--cream);
+      opacity: 0.45;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       5. PROFESSIONAL HISTORY
+       ══════════════════════════════════════════════════════ */
+    .history {
+      background: var(--slate-deep);
+      padding: 6rem clamp(2rem, 8vw, 6rem);
+    }
+
+    .history-inner { max-width: 1000px; margin: 0 auto; }
+
+    .timeline { margin-top: 3rem; }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0 2.5rem;
+      padding: 1.75rem 0;
+      border-top: 1px solid rgba(245,234,216,0.1);
+    }
+    .tl-item:last-child { border-bottom: 1px solid rgba(245,234,216,0.1); }
+
+    .tl-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--olive);
+      letter-spacing: 0.04em;
+      padding-top: 0.15rem;
+    }
+
+    .tl-title {
+      font-family: 'Caprasimo', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .tl-org {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--olive);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.03em;
+    }
+
+    .tl-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--cream-dim);
+    }
+
+    .resume-row {
+      margin-top: 2.5rem;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       6. CONTACT CTA
+       ══════════════════════════════════════════════════════ */
+    .contact {
+      background: var(--slate);
+      padding: 6rem clamp(2rem, 8vw, 6rem);
+      text-align: center;
+    }
+
+    .contact .heading { margin: 0 auto 0.75rem; max-width: 20ch; }
+
+    .contact-sub {
+      font-size: 1rem;
+      color: var(--cream-dim);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--text-dark);
+      padding: 2.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      opacity: 0.85;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.45;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .footer-links a:hover { opacity: 0.9; }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--cream);
+      opacity: 0.3;
+      width: 100%;
+    }
+
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+        gap: 2.5rem;
+      }
+      .hero-photo-wrap { justify-content: center; }
+      .hero-photo-card { max-width: 300px; }
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo { max-height: 340px; aspect-ratio: 4/3; }
+      .works-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .footer { flex-direction: column; align-items: flex-start; }
+      .nav-links { display: none; }
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       STICKY NAV
-       ══════════════════════════════════════════════════════ -->
-  <header class="sp-nav sp-nav--transparent" id="sp-nav">
-    <a class="sp-nav-brand" href="home.html">Rachel Schneider</a>
-
+  <!-- NAV -->
+  <header class="top-nav">
+    <a class="nav-brand" href="home.html">Rachel Schneider</a>
     <nav aria-label="Main">
-      <ul class="sp-nav-links" id="sp-nav-links">
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#work">Works &amp; Publications</a></li>
-        <li><a href="#history">Professional History</a></li>
-        <li><a href="#contact">Contact Me</a></li>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#works">Works</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-
-    <button class="sp-nav-toggle" id="sp-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <svg width="22" height="16" viewBox="0 0 22 16" fill="currentColor" aria-hidden="true">
-        <rect width="22" height="2" rx="1"/>
-        <rect y="7" width="22" height="2" rx="1"/>
-        <rect y="14" width="22" height="2" rx="1"/>
-      </svg>
-    </button>
   </header>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       HERO
-       ══════════════════════════════════════════════════════ -->
-  <section class="sp-hero" id="top">
-    <!--
-      PHOTO PLACEHOLDER — replace the URL below with your own photo when ready.
-      Current image: Pacific coast landscape from Unsplash (free to use, CC0 licence).
-    -->
-    <div class="sp-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1920&q=80');"></div>
-    <div class="sp-hero-overlay"></div>
-    <div class="sp-hero-content">
-      <p class="sp-hero-eyebrow">Policy Analyst &amp; Researcher</p>
-      <h1 class="sp-hero-name">Rachel Schneider</h1>
+  <!-- 1. HERO -->
+  <section class="hero">
+
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-card">
+        <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
+      </div>
     </div>
-    <!-- Scroll cue -->
-    <a href="#about" class="sp-hero-scroll" aria-label="Scroll to About Me">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <path d="M4 7l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
+
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Policy Analyst &amp; Researcher · Victoria, BC</p>
+      <h1 class="hero-name">Rachel<br>Schneider</h1>
+      <p class="hero-tagline">Translating complex policy frameworks into clear, equitable recommendations — grounded in rigorous research and a commitment to community.</p>
+      <div class="hero-actions">
+        <a href="#works" class="btn btn-cream">See My Work</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
   </section>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       ABOUT ME
-       ══════════════════════════════════════════════════════ -->
-  <section class="sp-section" id="about">
-    <div class="sp-section-inner">
+  <!-- 2. ORGANIZATIONS -->
+  <section class="orgs">
+    <p class="label">Organizations I've worked with</p>
+    <div class="orgs-grid">
 
-      <p class="section-eyebrow">About Me</p>
-      <h2 class="section-heading">Research at the intersection of policy, people, and place</h2>
-      <hr class="section-rule">
+      <a class="org-card" href="https://www.alliancetoendhomelessness.ca" target="_blank" rel="noopener">
+        <p class="org-name">Alliance to End Homelessness in the Capital Region</p>
+        <p class="org-role">Community Projects &amp; Research Assistant</p>
+      </a>
 
-      <div class="bio-layout">
-        <div class="bio-text">
-          <p class="lead">Master of Arts graduate with hands-on experience conducting research and distilling complex data into accessible reports. Over three years assisting individuals experiencing homelessness or food insecurity through community-based volunteer roles.</p>
+      <a class="org-card" href="https://www.projectreconnect.ca" target="_blank" rel="noopener">
+        <p class="org-name">Project Reconnect</p>
+        <p class="org-role">Board Member &amp; Project Coordinator</p>
+      </a>
 
-          <p>Detail-oriented and fluent in English and French, I bring a proactive, problem-solving approach to everything I do. I'm motivated by advancing equitable, anti-colonial community development — translating dense legislative and policy frameworks into clear recommendations that serve real people.</p>
+      <a class="org-card" href="https://www.rotary.org" target="_blank" rel="noopener">
+        <p class="org-name">Rotary Club of Victoria Harbourside</p>
+        <p class="org-role">Chair, Youth Exchange Committee</p>
+      </a>
 
-          <p>My academic background in History and Cultural, Social, and Political Thought grounds my research in rigorous historical and theoretical analysis. My MA thesis synthesized over 2,000 historical newspaper articles to examine race, gender, and American imperial expansion at the turn of the twentieth century.</p>
+    </div>
+  </section>
 
-          <p>Beyond academia, I have spent years working directly with communities: coordinating large-scale service events for unhoused individuals, supporting seniors facing food insecurity, and producing policy research for the Alliance to End Homelessness in the Capital Region.</p>
-        </div>
 
-        <div>
-          <div class="sidebar-panel">
-            <h3>Core Competencies</h3>
-            <div class="tag-cloud">
-              <span class="tag tag-accent">Investigative Research</span>
-              <span class="tag tag-accent">Legislative Analysis</span>
-              <span class="tag tag-accent">Policy Analysis</span>
-              <span class="tag tag-accent-2">Stakeholder Engagement</span>
-              <span class="tag tag-accent-2">Report Writing</span>
-              <span class="tag tag-accent-2">Project Coordination</span>
-              <span class="tag tag-neutral">Records Management</span>
-              <span class="tag tag-neutral">Meeting Coordination</span>
-              <span class="tag tag-neutral">Public Communication</span>
-              <span class="tag tag-neutral">Dispute Resolution</span>
-              <span class="tag tag-neutral">Interviewing</span>
-              <span class="tag tag-neutral">Admin Coordination</span>
-            </div>
-          </div>
+  <!-- 3. ABOUT ME -->
+  <section class="about" id="about">
+    <div class="about-inner">
 
-          <div class="sidebar-panel">
-            <h3>Languages</h3>
-            <p>English — native<br>French — advanced</p>
-          </div>
+      <div class="about-photo">
+        <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
+      </div>
 
-          <div class="sidebar-panel">
-            <h3>Education</h3>
-            <p style="margin-bottom: 0.65rem;">
-              <strong>MA, History</strong><br>
-              University of Victoria, 2019–2023<br>
-              <em style="font-size: 0.8rem; opacity: 0.72;">Concentration in Cultural, Social &amp; Political Thought</em>
-            </p>
-            <p>
-              <strong>BA, International Relations</strong><br>
-              University of British Columbia, 2013–2017<br>
-              <em style="font-size: 0.8rem; opacity: 0.72;">Class I standing</em>
-            </p>
-          </div>
+      <div class="about-text">
+        <p class="label">About Me</p>
+        <h2 class="heading">Research that serves real people</h2>
+
+        <p>I'm a policy analyst and researcher based in Victoria, BC, with an MA in History from the University of Victoria and a background in International Relations from UBC.</p>
+
+        <p>My work sits at the intersection of community need and policy frameworks — from a 60-page multi-jurisdictional sheltering report for the Alliance to End Homelessness to graduate research synthesizing 2,000+ historical newspaper articles on American imperialism and race.</p>
+
+        <p>I'm drawn to work that is equitable, anti-colonial, and grounded in direct community engagement. Bilingual in English and French.</p>
+
+        <div class="tags">
+          <span class="tag">Policy Analysis</span>
+          <span class="tag">Legislative Research</span>
+          <span class="tag tag-olive">Report Writing</span>
+          <span class="tag tag-olive">Stakeholder Engagement</span>
+          <span class="tag">English · French</span>
         </div>
       </div>
 
@@ -124,293 +612,139 @@
   </section>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       WORKS & PUBLICATIONS
-       ══════════════════════════════════════════════════════ -->
-  <section class="sp-section sp-section--tinted" id="work">
-    <div class="sp-section-inner sp-section-inner--wide">
-
-      <p class="section-eyebrow">Works &amp; Publications</p>
-      <h2 class="section-heading">Research, Projects &amp; Affiliations</h2>
-      <hr class="section-rule">
-
-      <!-- Published Work -->
-      <p class="sp-sub-label">Published Work</p>
-      <div class="work-stack sp-stack-gap">
+  <!-- 4. WORKS & PUBLICATIONS -->
+  <section class="works" id="works">
+    <div class="works-inner">
+      <p class="label">Works &amp; Publications</p>
+      <h2 class="heading">Published research &amp; policy work</h2>
+      <div class="works-grid">
 
         <div class="work-card">
-          <p class="work-card-meta">Policy Report &nbsp;·&nbsp; Alliance to End Homelessness in the Capital Region &nbsp;·&nbsp; 2025</p>
-          <h3>Regional Overview of Permitted Sheltering</h3>
-          <p>A 60-page multi-jurisdictional policy report examining the legal and regulatory frameworks governing temporary overnight sheltering in public spaces across 13 municipalities and 3 electoral areas of the Capital Regional District. Analyzes municipal bylaws, provincial statutes, and federal legislation, alongside relevant case law, to identify inconsistencies and opportunities for improvement in public administration.</p>
-        </div>
-
-        <div class="work-card work-card--olive">
-          <p class="work-card-meta">MA Thesis &nbsp;·&nbsp; University of Victoria &nbsp;·&nbsp; 2023</p>
-          <h3>"Expansion is too Clean a Name for it": Black Perspectives on the Spanish-Cuban-American and Philippines-American Wars</h3>
-          <p>Original qualitative research synthesizing more than 2,000 historical newspaper articles to examine competing political perspectives and public discourse among Black Americans on U.S. imperialism from 1898 to 1902. A racial and gendered analysis of Black media, drawing on intersectionality theory to examine how race, gender, and class shaped responses to American expansion. Completed with a concentration in Cultural, Social, and Political Thought (CSPT) at the University of Victoria.</p>
-        </div>
-
-      </div>
-
-      <!-- Current Projects -->
-      <p class="sp-sub-label">Current Projects</p>
-      <div class="work-stack sp-stack-gap">
-
-        <div class="work-card">
-          <p class="work-card-meta">Project Reconnect &nbsp;·&nbsp; Aug 2025 – Present</p>
-          <h3>Annual Community Service Event</h3>
-          <p>As Board Member &amp; Project Coordinator, I contribute to planning and executing an annual event that connected approximately 350 unhoused and precariously housed individuals with local support services in 2025. Responsibilities include board governance, sponsorship coordination, volunteer recruitment, and direct client services to individuals in crisis. I developed a comprehensive volunteer handbook and co-led on-site coordination.</p>
-        </div>
-
-        <div class="work-card work-card--olive">
-          <p class="work-card-meta">Rotary Club of Victoria Harbourside &nbsp;·&nbsp; Apr 2026 – Present</p>
-          <h3>Rotary Youth Exchange Program</h3>
-          <p>As Chair of the Youth Committee, I oversee both inbound exchange students hosted in Victoria and outbound students placed with partner clubs internationally — including screening host families, managing documentation and insurance, chairing monthly committee meetings, and liaising with Rotary District 5020 on compliance, training, and reporting.</p>
+          <p class="work-type">Policy Report</p>
+          <p class="work-title">Regional Overview of Permitted Sheltering</p>
+          <p class="work-desc">A 60-page multi-jurisdictional report examining legal and regulatory frameworks governing temporary overnight sheltering across 13 municipalities and 3 electoral areas of the Capital Regional District.</p>
+          <p class="work-meta">Alliance to End Homelessness · 2025</p>
         </div>
 
         <div class="work-card">
-          <p class="work-card-meta">Alliance to End Homelessness in the Capital Region &nbsp;·&nbsp; 2024–2025</p>
-          <h3>Seniors Advisory Committee Support</h3>
-          <p>Alongside the sheltering report, I identified senior-serving spaces across the Capital Region and contributed to research on elder abuse, social isolation, and housing insecurity among older adults. Coordinated committee meetings including agenda preparation, minute-taking, and follow-up tracking.</p>
+          <p class="work-type">MA Thesis</p>
+          <p class="work-title">"Expansion is too Clean a Name for it"</p>
+          <p class="work-desc">Original qualitative research synthesizing more than 2,000 historical newspaper articles examining Black American perspectives on U.S. imperialism, race, and gender from 1898 to 1902.</p>
+          <p class="work-meta">University of Victoria · 2023</p>
         </div>
 
       </div>
-
-      <!-- Organizations -->
-      <p class="sp-sub-label">Organizations I Serve</p>
-      <div class="org-grid">
-
-        <div class="card elev-sm">
-          <p class="card-kicker">Board Member &amp; Project Coordinator</p>
-          <p class="card-title">Project Reconnect</p>
-          <p class="card-body">Annual community service event connecting hundreds of unhoused individuals with support services in Victoria, BC.</p>
-          <p class="card-meta">Aug 2025 – Present &nbsp;·&nbsp; Victoria, BC</p>
-        </div>
-
-        <div class="card elev-sm">
-          <p class="card-kicker">Chair, Youth Committee &amp; Rotarian</p>
-          <p class="card-title">Rotary Club of Victoria Harbourside</p>
-          <p class="card-body">Active Rotarian on the International Services Committee, and Chair of the Youth Exchange Program since April 2026.</p>
-          <p class="card-meta">Sept 2024 – Present &nbsp;·&nbsp; Victoria, BC</p>
-        </div>
-
-        <div class="card elev-sm">
-          <p class="card-kicker">Community Projects &amp; Research Assistant</p>
-          <p class="card-title">Alliance to End Homelessness in the Capital Region</p>
-          <p class="card-body">Authored a 60-page multi-jurisdictional policy report and supported the Seniors Advisory Committee.</p>
-          <p class="card-meta">Nov 2024 – Aug 2025 &nbsp;·&nbsp; Victoria, BC</p>
-        </div>
-
-      </div>
-
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       PROFESSIONAL HISTORY
-       ══════════════════════════════════════════════════════ -->
-  <section class="sp-section" id="history">
-    <div class="sp-section-inner">
-
-      <p class="section-eyebrow">Professional History</p>
-      <h2 class="section-heading">Experience &amp; Education</h2>
-      <hr class="section-rule">
-
-      <div class="sp-resume-action">
-        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0">
-            <path d="M7.5 10.5L3 6H6V1H9V6H12L7.5 10.5Z" fill="currentColor"/>
-            <path d="M2 12H13V14H2V12Z" fill="currentColor"/>
-          </svg>
-          Download Full Resume
-        </a>
-      </div>
+  <!-- 5. PROFESSIONAL HISTORY -->
+  <section class="history" id="history">
+    <div class="history-inner">
+      <p class="label">Professional History</p>
+      <h2 class="heading">Experience &amp; Education</h2>
 
       <div class="timeline">
 
-        <div class="timeline-item">
-          <p class="timeline-date">Apr 2026 – Present</p>
-          <h3 class="timeline-title">Chair, Youth Committee</h3>
-          <p class="timeline-org">Rotary Club of Victoria Harbourside &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Overseeing the Rotary Youth Exchange program at the club level, screening host families, serving as primary liaison for students and families, and chairing monthly committee meetings.</p>
+        <div class="tl-item">
+          <p class="tl-date">Apr 2026 – Present</p>
+          <div>
+            <p class="tl-title">Chair, Youth Committee</p>
+            <p class="tl-org">Rotary Club of Victoria Harbourside</p>
+            <p class="tl-desc">Overseeing the Rotary Youth Exchange program, screening host families, and chairing monthly committee meetings.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Aug 2025 – Present</p>
-          <h3 class="timeline-title">Board Member &amp; Project Coordinator</h3>
-          <p class="timeline-org">Project Reconnect &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Contributing to board governance and event planning for an annual service event serving ~350 unhoused individuals. Developed a comprehensive volunteer handbook and co-led volunteer recruitment and on-site coordination.</p>
+        <div class="tl-item">
+          <p class="tl-date">Aug 2025 – Present</p>
+          <div>
+            <p class="tl-title">Board Member &amp; Project Coordinator</p>
+            <p class="tl-org">Project Reconnect</p>
+            <p class="tl-desc">Board governance and event planning for an annual service event serving ~350 unhoused individuals. Developed the volunteer handbook and co-led on-site coordination.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Nov 2024 – Aug 2025</p>
-          <h3 class="timeline-title">Community Projects &amp; Research Assistant</h3>
-          <p class="timeline-org">Alliance to End Homelessness in the Capital Region &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Researched and authored a 60-page multi-jurisdictional policy report on permitted sheltering in the Capital Regional District. Supported the Seniors Advisory Committee project and coordinated committee meetings.</p>
+        <div class="tl-item">
+          <p class="tl-date">Nov 2024 – Aug 2025</p>
+          <div>
+            <p class="tl-title">Community Projects &amp; Research Assistant</p>
+            <p class="tl-org">Alliance to End Homelessness in the Capital Region</p>
+            <p class="tl-desc">Researched and authored a 60-page multi-jurisdictional policy report on permitted sheltering in the Capital Regional District.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Sept 2024 – Present</p>
-          <h3 class="timeline-title">Rotarian, International Services Committee</h3>
-          <p class="timeline-org">Rotary Club of Victoria Harbourside &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Reviewing international charity grant applications, providing monthly support for senior food deliveries, and supporting club fundraising and community engagement events.</p>
+        <div class="tl-item">
+          <p class="tl-date">Sept 2020 – Aug 2021</p>
+          <div>
+            <p class="tl-title">Teaching Assistant Consultant</p>
+            <p class="tl-org">University of Victoria</p>
+            <p class="tl-desc">Delivered customized workshops for graduate TAs and provided one-on-one mentorship to 17 teaching assistants.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Jun 2023 – Present</p>
-          <h3 class="timeline-title">Server</h3>
-          <p class="timeline-org">Irish Times Pub &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Providing high-quality customer service in a fast-paced, high-volume environment. Recognized for professionalism, attention to detail, and positive relationships with patrons and team members.</p>
+        <div class="tl-item">
+          <p class="tl-date">Nov 2018 – Aug 2019</p>
+          <div>
+            <p class="tl-title">Administrative Assistant &amp; Legal Aid</p>
+            <p class="tl-org">Higgerty Law · Calgary, AB</p>
+            <p class="tl-desc">Managed the principal attorney's schedule and caseload; designed a digital archiving system converting hundreds of case files into a searchable database.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Sept 2020 – Aug 2021</p>
-          <h3 class="timeline-title">Teaching Assistant Consultant</h3>
-          <p class="timeline-org">University of Victoria – Learning and Teaching Support and Innovation &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Delivered over eight hours of customized workshops for graduate teaching assistants and provided one-on-one mentorship to 17 TAs. Authored a year-end report on program outcomes and recommendations.</p>
+        <div class="tl-item">
+          <p class="tl-date">2019 – 2023</p>
+          <div>
+            <p class="tl-title">Master of Arts, History</p>
+            <p class="tl-org">University of Victoria</p>
+            <p class="tl-desc">Concentration in Cultural, Social &amp; Political Thought. Thesis on Black American perspectives on U.S. imperialism, 1898–1902.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Sept 2019 – Aug 2020</p>
-          <h3 class="timeline-title">Teaching Assistant</h3>
-          <p class="timeline-org">University of Victoria &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Led tutorials for four undergraduate history courses, marked assignments, and supported student learning through reflective questions and direct engagement with lecture materials.</p>
+        <div class="tl-item">
+          <p class="tl-date">2013 – 2017</p>
+          <div>
+            <p class="tl-title">Bachelor of Arts, International Relations</p>
+            <p class="tl-org">University of British Columbia</p>
+            <p class="tl-desc">Graduated with Class I standing.</p>
+          </div>
         </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Nov 2018 – Aug 2019</p>
-          <h3 class="timeline-title">Administrative Assistant &amp; Legal Aid</h3>
-          <p class="timeline-org">Higgerty Law &nbsp;·&nbsp; Calgary, AB</p>
-          <p class="timeline-desc">Managed the principal attorney's schedule and caseload, maintained confidential records, and designed a digital archiving system converting hundreds of case files into a searchable database.</p>
-        </div>
+      </div>
 
-        <div class="timeline-item">
-          <p class="timeline-date">Sept 2017 – Aug 2018</p>
-          <h3 class="timeline-title">Teaching Assistant</h3>
-          <p class="timeline-org">Langara College &nbsp;·&nbsp; Vancouver, BC</p>
-          <p class="timeline-desc">Graded and evaluated papers, midterms, and finals for over 200 students across five courses. Recruited by a former professor at UBC.</p>
-        </div>
-
-        <div class="timeline-item">
-          <p class="timeline-date">Sept 2013 – Jul 2018</p>
-          <h3 class="timeline-title">Founder &amp; Coach</h3>
-          <p class="timeline-org">Eric Hamber Debate Club &nbsp;·&nbsp; Vancouver, BC</p>
-          <p class="timeline-desc">Founded and managed a successful debate club for five years, organizing interschool tournaments, securing a program grant, and mentoring students in critical thinking and public speaking.</p>
-        </div>
-
-        <!-- Education -->
-        <div class="timeline-item timeline-item--education">
-          <p class="timeline-date">2019 – 2023</p>
-          <h3 class="timeline-title">Master of Arts, History</h3>
-          <p class="timeline-org">University of Victoria &nbsp;·&nbsp; Victoria, BC</p>
-          <p class="timeline-desc">Thesis: <em>"Expansion is too Clean a Name for it": Black Perspectives on American Imperial Expansion, 1898–1902.</em> Concentration in Cultural, Social, and Political Thought (CSPT).</p>
-        </div>
-
-        <div class="timeline-item timeline-item--education">
-          <p class="timeline-date">2013 – 2017</p>
-          <h3 class="timeline-title">Bachelor of Arts, International Relations</h3>
-          <p class="timeline-org">University of British Columbia &nbsp;·&nbsp; Vancouver, BC</p>
-          <p class="timeline-desc">Graduated with Class I standing.</p>
-        </div>
-
+      <div class="resume-row">
+        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="btn btn-cream">
+          Download Full Resume
+        </a>
       </div>
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       CONTACT ME
-       ══════════════════════════════════════════════════════ -->
-  <section class="sp-section sp-section--tinted" id="contact">
-    <div class="sp-section-inner">
-
-      <p class="section-eyebrow">Contact Me</p>
-      <h2 class="section-heading">Get in Touch</h2>
-      <hr class="section-rule">
-
-      <p class="sp-contact-intro">I'm always open to connecting with researchers, community organizations, and policy professionals. Feel free to reach out.</p>
-
-      <div class="contact-grid">
-
-        <a href="mailto:rkeschneider@gmail.com" class="contact-card">
-          <div class="contact-icon">
-            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h3>Email</h3>
-          <p>rkeschneider@gmail.com</p>
-        </a>
-
-        <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener noreferrer" class="contact-card">
-          <div class="contact-icon">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </div>
-          <h3>LinkedIn</h3>
-          <p>linkedin.com/in/racheleschneider</p>
-        </a>
-
-        <div class="contact-card contact-card--static">
-          <div class="contact-icon contact-icon--olive">
-            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3>Location</h3>
-          <p>Victoria, British Columbia</p>
-        </div>
-
-      </div>
+  <!-- 6. CONTACT -->
+  <section class="contact" id="contact">
+    <p class="label">Contact Me</p>
+    <h2 class="heading">Let's work together</h2>
+    <p class="contact-sub">Open to connecting with researchers, community organizations, and policy professionals.</p>
+    <div class="contact-btns">
+      <a href="mailto:rkeschneider@gmail.com" class="btn btn-cream">Email Me</a>
+      <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-       ══════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
+  <!-- FOOTER -->
+  <footer class="footer">
     <span class="footer-brand">Rachel Schneider</span>
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="#about">About Me</a>
-      <a href="#work">Works &amp; Publications</a>
-      <a href="#history">Professional History</a>
-      <a href="#contact">Contact Me</a>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#works">Works</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
-    <p class="footer-copy">Victoria, BC &nbsp;·&nbsp; <a href="mailto:rkeschneider@gmail.com">rkeschneider@gmail.com</a></p>
+    <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC · <a href="mailto:rkeschneider@gmail.com" style="color:inherit">rkeschneider@gmail.com</a></p>
   </footer>
-
-
-  <script>
-    /* ── Nav scroll behaviour ── */
-    const nav    = document.getElementById('sp-nav');
-    const heroEl = document.querySelector('.sp-hero');
-
-    function updateNav() {
-      const past = window.scrollY > (heroEl ? heroEl.offsetHeight - 72 : 60);
-      nav.classList.toggle('sp-nav--transparent', !past);
-      nav.classList.toggle('sp-nav--solid', past);
-    }
-
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-
-    /* ── Mobile toggle ── */
-    const toggle  = document.getElementById('sp-nav-toggle');
-    const navList = document.getElementById('sp-nav-links');
-
-    toggle?.addEventListener('click', () => {
-      const open = navList.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open);
-    });
-
-    navList?.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => navList.classList.remove('is-open'))
-    );
-  </script>
 
 </body>
 </html>
