@@ -8,39 +8,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
 
-    /* ── Palette ──────────────────────────────────────────── */
     :root {
-      --slate:       #72919d;
-      --slate-dark:  #5c7882;
-      --slate-deep:  #3f5760;
-      --cream:       #f5ead8;
-      --cream-dim:   rgba(245,234,216,0.72);
-      --cream-faint: rgba(245,234,216,0.12);
+      --beige:       #d4cbb8;   /* card-back background */
+      --beige-deep:  #c3baaa;   /* slightly deeper for section variation */
+      --beige-light: #e2dbd0;   /* lighter for cards/surfaces */
+      --slate:       #72919d;   /* primary accent — matches front card */
+      --slate-dark:  #3f5760;   /* dark text & nav */
+      --slate-deep:  #2d3d45;   /* headings */
       --olive:       #939c73;
-      --olive-dark:  #747a59;
-      --text-dark:   #1e2a2e;
-      --radius:      20px;
-      --nav-h:       64px;
+      --cream:       #f5ead8;
+      --radius:      18px;
+      --nav-h:       62px;
     }
 
-    /* ── Reset & base ─────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--slate);
-      color: var(--cream);
+      background: var(--beige);
+      color: var(--slate-deep);
       font-family: 'Figtree', system-ui, sans-serif;
       line-height: 1.6;
     }
 
-    /* ── Shared typography ────────────────────────────────── */
     .label {
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      color: var(--slate);
       margin-bottom: 0.75rem;
     }
 
@@ -49,11 +45,11 @@
       font-size: clamp(1.8rem, 3.2vw, 2.6rem);
       font-weight: 400;
       line-height: 1.15;
-      color: var(--cream);
+      color: var(--slate-deep);
       margin-bottom: 1.25rem;
     }
 
-    /* ── Shared buttons ───────────────────────────────────── */
+    /* ── Buttons ─────────────────────────────────────────── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -66,38 +62,29 @@
       letter-spacing: 0.07em;
       text-transform: uppercase;
       text-decoration: none;
-      cursor: pointer;
       border: none;
+      cursor: pointer;
       transition: opacity 0.18s ease, transform 0.18s ease;
     }
-    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
+    .btn:hover { opacity: 0.82; transform: translateY(-1px); }
 
-    .btn-cream {
-      background: var(--cream);
-      color: var(--slate-deep);
-    }
+    .btn-slate  { background: var(--slate); color: var(--cream); }
+    .btn-dark   { background: var(--slate-dark); color: var(--cream); }
     .btn-outline {
       background: transparent;
-      color: var(--cream);
-      border: 1.5px solid rgba(245,234,216,0.4);
+      color: var(--slate-dark);
+      border: 1.5px solid rgba(63,87,96,0.35);
     }
-    .btn-outline:hover { border-color: var(--cream); }
-
-    .btn-dark {
-      background: var(--slate-deep);
-      color: var(--cream);
-    }
+    .btn-outline:hover { border-color: var(--slate-dark); }
 
     /* ══════════════════════════════════════════════════════
-       STICKY NAV
+       TOP NAV
        ══════════════════════════════════════════════════════ */
     .top-nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--slate);
-      border-bottom: 1px solid rgba(245,234,216,0.1);
+      background: var(--slate-dark);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -106,10 +93,11 @@
     }
 
     .nav-brand {
-      font-family: 'Caprasimo', Georgia, serif;
+      font-family: 'Caprasimo', serif;
       font-size: 1.05rem;
       color: var(--cream);
       text-decoration: none;
+      opacity: 0.92;
     }
 
     .nav-links {
@@ -117,17 +105,17 @@
       gap: clamp(1.2rem, 3vw, 2.5rem);
       list-style: none;
     }
-
     .nav-links a {
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      color: var(--cream);
+      opacity: 0.6;
       text-decoration: none;
-      transition: color 0.18s ease;
+      transition: opacity 0.18s;
     }
-    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover { opacity: 1; }
 
 
     /* ══════════════════════════════════════════════════════
@@ -137,96 +125,96 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: calc(100vh - var(--nav-h));
-      background: var(--slate);
+      background: var(--beige);
       padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 5rem);
       gap: clamp(2.5rem, 5vw, 5rem);
       align-items: center;
-    }
-
-    /* Photo lives in a tall portrait card */
-    .hero-photo-wrap {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .hero-photo-card {
-      width: 100%;
-      max-width: 420px;
-      /* Tall portrait frame — shows face & shoulders comfortably */
-      aspect-ratio: 3 / 4;
-      border-radius: var(--radius);
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 24px 64px rgba(30,42,46,0.4);
     }
 
-    .hero-photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Move down slightly so face (not hair) is centred */
-      object-position: center 18%;
-      display: block;
+    /* Gold-flower watermark behind the composition */
+    .hero-flower {
+      position: absolute;
+      top: -10%;
+      left: -4%;
+      width: 60%;
+      height: 130%;
+      object-fit: contain;
+      object-position: top left;
+      opacity: 0.13;
+      pointer-events: none;
+      user-select: none;
     }
 
-    /* Text side */
     .hero-copy {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 0;
+      position: relative; /* sit above the flower */
     }
 
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--olive);
-      margin-bottom: 1rem;
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .hero-photo-card {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 3 / 4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 56px rgba(45,61,69,0.18);
+      /* Shift left so the card tucks into the pocket of the name */
+      transform: translateX(-9%);
+    }
+    .hero-photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
     }
 
     .hero-name {
-      font-family: 'Caprasimo', Georgia, serif;
+      font-family: 'Caprasimo', serif;
       font-size: clamp(3rem, 5.5vw, 5.5rem);
       line-height: 1.0;
-      color: var(--cream);
+      color: var(--slate-deep);
       margin-bottom: 1.5rem;
     }
 
     .hero-tagline {
       font-size: clamp(1rem, 1.5vw, 1.15rem);
-      line-height: 1.7;
-      color: var(--cream-dim);
+      line-height: 1.75;
+      color: var(--slate-dark);
+      opacity: 0.78;
       max-width: 38ch;
       margin-bottom: 2.5rem;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 
     /* ══════════════════════════════════════════════════════
-       2. ORGANIZATIONS STRIP
+       2. ORGANIZATIONS
        ══════════════════════════════════════════════════════ */
     .orgs {
-      background: var(--slate-deep);
+      background: var(--slate-dark);
       padding: 3.5rem clamp(2rem, 8vw, 6rem);
     }
-
-    .orgs .label { text-align: center; margin-bottom: 2rem; }
+    .orgs .label { color: rgba(245,234,216,0.55); text-align: center; margin-bottom: 2rem; }
 
     .orgs-grid {
       display: flex;
       gap: 1.25rem;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .org-card {
-      background: var(--cream-faint);
+      background: rgba(245,234,216,0.08);
       border: 1px solid rgba(245,234,216,0.18);
       border-radius: var(--radius);
       padding: 1.5rem 2rem;
@@ -234,24 +222,25 @@
       color: var(--cream);
       text-align: center;
       flex: 1;
-      min-width: 200px;
-      max-width: 270px;
+      max-width: 300px;
       transition: background 0.2s, transform 0.2s;
     }
-    .org-card:hover { background: rgba(245,234,216,0.18); transform: translateY(-3px); }
+    .org-card:hover { background: rgba(245,234,216,0.15); transform: translateY(-3px); }
 
     .org-name {
       font-family: 'Caprasimo', serif;
-      font-size: 0.95rem;
-      line-height: 1.3;
+      font-size: 0.9rem;
+      line-height: 1.35;
       margin-bottom: 0.5rem;
+      color: var(--cream);
     }
     .org-role {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--olive);
+      color: var(--slate);
+      opacity: 0.9;
     }
 
 
@@ -259,12 +248,28 @@
        3. ABOUT ME
        ══════════════════════════════════════════════════════ */
     .about {
-      background: var(--slate);
+      background: var(--beige-deep);
       padding: 6rem clamp(2rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Yellow-flower decoration — lower-right corner of About */
+    .about-flower {
+      position: absolute;
+      bottom: -8%;
+      right: -4%;
+      width: 40%;
+      max-width: 380px;
+      object-fit: contain;
+      object-position: bottom right;
+      opacity: 0.22;
+      pointer-events: none;
+      user-select: none;
     }
 
     .about-inner {
-      max-width: 1000px;
+      max-width: 980px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1.5fr;
@@ -276,20 +281,20 @@
       border-radius: var(--radius);
       overflow: hidden;
       aspect-ratio: 3/4;
-      box-shadow: 0 20px 56px rgba(30,42,46,0.45);
+      box-shadow: 0 16px 48px rgba(45,61,69,0.2);
     }
     .about-photo img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 18%;
+      object-position: center center;
       display: block;
     }
 
     .about-text p {
       font-size: 1rem;
-      line-height: 1.78;
-      color: var(--cream-dim);
+      line-height: 1.8;
+      color: var(--slate-dark);
+      opacity: 0.85;
       margin-bottom: 1.1rem;
     }
 
@@ -299,167 +304,114 @@
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
-
     .tag {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.4rem 0.9rem;
+      padding: 0.38rem 0.9rem;
       border-radius: 999px;
-      border: 1px solid rgba(245,234,216,0.3);
-      color: var(--cream);
+      border: 1.5px solid rgba(63,87,96,0.3);
+      color: var(--slate-dark);
     }
-    .tag-olive { border-color: var(--olive); color: var(--olive); }
+    .tag-olive { border-color: var(--olive); color: var(--olive-dark, #747a59); }
 
 
     /* ══════════════════════════════════════════════════════
-       4. WORKS & PUBLICATIONS
+       4. RESUME & LINKS
        ══════════════════════════════════════════════════════ */
-    .works {
-      background: var(--olive-dark);
+    .resume-section {
+      background: var(--beige);
       padding: 6rem clamp(2rem, 8vw, 6rem);
     }
 
-    .works-inner { max-width: 1000px; margin: 0 auto; }
-
-    .works-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .work-card {
-      background: rgba(245,234,216,0.1);
-      border: 1px solid rgba(245,234,216,0.18);
-      border-radius: var(--radius);
-      padding: 2rem 2rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      transition: background 0.2s;
-    }
-    .work-card:hover { background: rgba(245,234,216,0.15); }
-
-    .work-type {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.55;
-    }
-
-    .work-title {
-      font-family: 'Caprasimo', serif;
-      font-size: 1.2rem;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--cream);
-    }
-
-    .work-desc {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--cream-dim);
-      flex: 1;
-    }
-
-    .work-meta {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--cream);
-      opacity: 0.45;
-    }
-
-
-    /* ══════════════════════════════════════════════════════
-       5. PROFESSIONAL HISTORY
-       ══════════════════════════════════════════════════════ */
-    .history {
-      background: var(--slate-deep);
-      padding: 6rem clamp(2rem, 8vw, 6rem);
-    }
-
-    .history-inner { max-width: 1000px; margin: 0 auto; }
-
-    .timeline { margin-top: 3rem; }
-
-    .tl-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 0 2.5rem;
-      padding: 1.75rem 0;
-      border-top: 1px solid rgba(245,234,216,0.1);
-    }
-    .tl-item:last-child { border-bottom: 1px solid rgba(245,234,216,0.1); }
-
-    .tl-date {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--olive);
-      letter-spacing: 0.04em;
-      padding-top: 0.15rem;
-    }
-
-    .tl-title {
-      font-family: 'Caprasimo', serif;
-      font-size: 1.05rem;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 0.2rem;
-    }
-
-    .tl-org {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--olive);
-      margin-bottom: 0.45rem;
-      letter-spacing: 0.03em;
-    }
-
-    .tl-desc {
-      font-size: 0.88rem;
-      line-height: 1.65;
-      color: var(--cream-dim);
-    }
-
-    .resume-row {
-      margin-top: 2.5rem;
-    }
-
-
-    /* ══════════════════════════════════════════════════════
-       6. CONTACT CTA
-       ══════════════════════════════════════════════════════ */
-    .contact {
-      background: var(--slate);
-      padding: 6rem clamp(2rem, 8vw, 6rem);
+    .resume-inner {
+      max-width: 860px;
+      margin: 0 auto;
       text-align: center;
     }
 
-    .contact .heading { margin: 0 auto 0.75rem; max-width: 20ch; }
+    .resume-inner .heading { margin-bottom: 0.75rem; }
 
-    .contact-sub {
+    .resume-sub {
       font-size: 1rem;
-      color: var(--cream-dim);
-      margin-bottom: 2.5rem;
+      color: var(--slate-dark);
+      opacity: 0.7;
+      margin-bottom: 3rem;
     }
 
-    .contact-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+    .resume-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
+
+    .resume-card {
+      background: var(--beige-light);
+      border: 1px solid rgba(63,87,96,0.12);
+      border-radius: var(--radius);
+      padding: 2.25rem 1.5rem 2rem;
+      text-decoration: none;
+      color: var(--slate-deep);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .resume-card:hover {
+      box-shadow: 0 8px 32px rgba(45,61,69,0.12);
+      transform: translateY(-3px);
+    }
+
+    .resume-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+
+    .resume-card-title {
+      font-family: 'Caprasimo', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--slate-deep);
+    }
+
+    .resume-card-desc {
+      font-size: 0.83rem;
+      line-height: 1.55;
+      color: var(--slate-dark);
+      opacity: 0.65;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       5. CONTACT CTA
+       ══════════════════════════════════════════════════════ */
+    .contact {
+      background: var(--slate-dark);
+      padding: 5rem clamp(2rem, 8vw, 6rem);
+      text-align: center;
+    }
+    .contact .label { color: rgba(245,234,216,0.5); }
+    .contact .heading { color: var(--cream); max-width: 22ch; margin: 0 auto 0.75rem; }
+    .contact-sub { font-size: 1rem; color: rgba(245,234,216,0.65); margin-bottom: 2.5rem; }
+    .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-cream-solid { background: var(--cream); color: var(--slate-dark); }
 
 
     /* ══════════════════════════════════════════════════════
        FOOTER
        ══════════════════════════════════════════════════════ */
     .footer {
-      background: var(--text-dark);
+      background: var(--slate-deep);
       padding: 2.5rem clamp(2rem, 8vw, 6rem);
       display: flex;
       align-items: center;
@@ -467,37 +419,25 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
     .footer-brand {
       font-family: 'Caprasimo', serif;
       font-size: 1rem;
       color: var(--cream);
-      opacity: 0.85;
+      opacity: 0.8;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
     .footer-links a {
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--cream);
-      opacity: 0.45;
+      opacity: 0.4;
       text-decoration: none;
       transition: opacity 0.18s;
     }
     .footer-links a:hover { opacity: 0.9; }
-
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--cream);
-      opacity: 0.3;
-      width: 100%;
-    }
+    .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
 
 
     /* ── Responsive ───────────────────────────────────────── */
@@ -507,12 +447,17 @@
         padding: 3rem 1.5rem;
         gap: 2.5rem;
       }
+      /* On mobile: photo first, then name below */
+      .hero { display: flex; flex-direction: column-reverse; }
       .hero-photo-wrap { justify-content: center; }
-      .hero-photo-card { max-width: 300px; }
+      .hero-photo-card { max-width: 280px; transform: none; }
+      .hero-flower { width: 90%; top: 0; left: -10%; opacity: 0.1; }
+      .orgs-grid { flex-wrap: wrap; }
+      .org-card { min-width: 160px; }
       .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .about-photo { max-height: 340px; aspect-ratio: 4/3; }
-      .works-grid { grid-template-columns: 1fr; }
-      .tl-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .about-photo { aspect-ratio: 4/3; max-height: 320px; }
+      .about-flower { width: 60%; opacity: 0.15; }
+      .resume-cards { grid-template-columns: 1fr; }
       .footer { flex-direction: column; align-items: flex-start; }
       .nav-links { display: none; }
     }
@@ -521,14 +466,13 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- TOP NAV -->
   <header class="top-nav">
     <a class="nav-brand" href="home.html">Rachel Schneider</a>
     <nav aria-label="Main">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#history">History</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -537,23 +481,23 @@
 
   <!-- 1. HERO -->
   <section class="hero">
-
+    <!-- Gold-flower: low-opacity watermark behind the name -->
+    <img class="hero-flower" src="assets/Gold-flower.png" alt="" aria-hidden="true">
+    <!-- Name/copy LEFT column -->
+    <div class="hero-copy">
+      <h1 class="hero-name">Rachel<br>Schneider</h1>
+      <p class="hero-tagline">Policy analyst and researcher committed to translating complex frameworks into equitable, community-centred recommendations.</p>
+      <div class="hero-actions">
+        <a href="#resume" class="btn btn-slate">View Resume</a>
+        <a href="#about" class="btn btn-outline">About Me</a>
+      </div>
+    </div>
+    <!-- Photo RIGHT column, shifted left into the name's pocket -->
     <div class="hero-photo-wrap">
       <div class="hero-photo-card">
         <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
       </div>
     </div>
-
-    <div class="hero-copy">
-      <p class="hero-eyebrow">Policy Analyst &amp; Researcher · Victoria, BC</p>
-      <h1 class="hero-name">Rachel<br>Schneider</h1>
-      <p class="hero-tagline">Translating complex policy frameworks into clear, equitable recommendations — grounded in rigorous research and a commitment to community.</p>
-      <div class="hero-actions">
-        <a href="#works" class="btn btn-cream">See My Work</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-      </div>
-    </div>
-
   </section>
 
 
@@ -583,22 +527,18 @@
 
   <!-- 3. ABOUT ME -->
   <section class="about" id="about">
+    <!-- Yellow-flower decoration: lower-right corner -->
+    <img class="about-flower" src="assets/Yellow-flower.png" alt="" aria-hidden="true">
     <div class="about-inner">
-
       <div class="about-photo">
-        <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
+        <img src="assets/ocean-view.jpg" alt="Pacific Northwest coastline">
       </div>
-
       <div class="about-text">
         <p class="label">About Me</p>
         <h2 class="heading">Research that serves real people</h2>
-
         <p>I'm a policy analyst and researcher based in Victoria, BC, with an MA in History from the University of Victoria and a background in International Relations from UBC.</p>
-
-        <p>My work sits at the intersection of community need and policy frameworks — from a 60-page multi-jurisdictional sheltering report for the Alliance to End Homelessness to graduate research synthesizing 2,000+ historical newspaper articles on American imperialism and race.</p>
-
-        <p>I'm drawn to work that is equitable, anti-colonial, and grounded in direct community engagement. Bilingual in English and French.</p>
-
+        <p>My work sits at the intersection of community need and policy — from a 60-page multi-jurisdictional sheltering report to graduate research synthesizing 2,000+ historical newspaper articles on race and American imperialism.</p>
+        <p>I'm drawn to equitable, anti-colonial work grounded in direct community engagement. Bilingual in English and French.</p>
         <div class="tags">
           <span class="tag">Policy Analysis</span>
           <span class="tag">Legislative Research</span>
@@ -607,127 +547,65 @@
           <span class="tag">English · French</span>
         </div>
       </div>
-
     </div>
   </section>
 
 
-  <!-- 4. WORKS & PUBLICATIONS -->
-  <section class="works" id="works">
-    <div class="works-inner">
-      <p class="label">Works &amp; Publications</p>
-      <h2 class="heading">Published research &amp; policy work</h2>
-      <div class="works-grid">
+  <!-- 4. RESUME & LINKS -->
+  <section class="resume-section" id="resume">
+    <div class="resume-inner">
+      <p class="label">Resume &amp; Links</p>
+      <h2 class="heading">Find my work</h2>
+      <p class="resume-sub">View my full professional history, connect on LinkedIn, or download a copy of my resume.</p>
 
-        <div class="work-card">
-          <p class="work-type">Policy Report</p>
-          <p class="work-title">Regional Overview of Permitted Sheltering</p>
-          <p class="work-desc">A 60-page multi-jurisdictional report examining legal and regulatory frameworks governing temporary overnight sheltering across 13 municipalities and 3 electoral areas of the Capital Regional District.</p>
-          <p class="work-meta">Alliance to End Homelessness · 2025</p>
-        </div>
+      <div class="resume-cards">
 
-        <div class="work-card">
-          <p class="work-type">MA Thesis</p>
-          <p class="work-title">"Expansion is too Clean a Name for it"</p>
-          <p class="work-desc">Original qualitative research synthesizing more than 2,000 historical newspaper articles examining Black American perspectives on U.S. imperialism, race, and gender from 1898 to 1902.</p>
-          <p class="work-meta">University of Victoria · 2023</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- 5. PROFESSIONAL HISTORY -->
-  <section class="history" id="history">
-    <div class="history-inner">
-      <p class="label">Professional History</p>
-      <h2 class="heading">Experience &amp; Education</h2>
-
-      <div class="timeline">
-
-        <div class="tl-item">
-          <p class="tl-date">Apr 2026 – Present</p>
-          <div>
-            <p class="tl-title">Chair, Youth Committee</p>
-            <p class="tl-org">Rotary Club of Victoria Harbourside</p>
-            <p class="tl-desc">Overseeing the Rotary Youth Exchange program, screening host families, and chairing monthly committee meetings.</p>
+        <a href="resume.html" class="resume-card">
+          <div class="resume-card-icon">
+            <!-- Document icon -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
           </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">Aug 2025 – Present</p>
-          <div>
-            <p class="tl-title">Board Member &amp; Project Coordinator</p>
-            <p class="tl-org">Project Reconnect</p>
-            <p class="tl-desc">Board governance and event planning for an annual service event serving ~350 unhoused individuals. Developed the volunteer handbook and co-led on-site coordination.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">Nov 2024 – Aug 2025</p>
-          <div>
-            <p class="tl-title">Community Projects &amp; Research Assistant</p>
-            <p class="tl-org">Alliance to End Homelessness in the Capital Region</p>
-            <p class="tl-desc">Researched and authored a 60-page multi-jurisdictional policy report on permitted sheltering in the Capital Regional District.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">Sept 2020 – Aug 2021</p>
-          <div>
-            <p class="tl-title">Teaching Assistant Consultant</p>
-            <p class="tl-org">University of Victoria</p>
-            <p class="tl-desc">Delivered customized workshops for graduate TAs and provided one-on-one mentorship to 17 teaching assistants.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">Nov 2018 – Aug 2019</p>
-          <div>
-            <p class="tl-title">Administrative Assistant &amp; Legal Aid</p>
-            <p class="tl-org">Higgerty Law · Calgary, AB</p>
-            <p class="tl-desc">Managed the principal attorney's schedule and caseload; designed a digital archiving system converting hundreds of case files into a searchable database.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">2019 – 2023</p>
-          <div>
-            <p class="tl-title">Master of Arts, History</p>
-            <p class="tl-org">University of Victoria</p>
-            <p class="tl-desc">Concentration in Cultural, Social &amp; Political Thought. Thesis on Black American perspectives on U.S. imperialism, 1898–1902.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <p class="tl-date">2013 – 2017</p>
-          <div>
-            <p class="tl-title">Bachelor of Arts, International Relations</p>
-            <p class="tl-org">University of British Columbia</p>
-            <p class="tl-desc">Graduated with Class I standing.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="resume-row">
-        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="btn btn-cream">
-          Download Full Resume
+          <p class="resume-card-title">Resume</p>
+          <p class="resume-card-desc">View my full professional history and education as a webpage.</p>
         </a>
+
+        <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener" class="resume-card">
+          <div class="resume-card-icon">
+            <!-- LinkedIn icon -->
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <p class="resume-card-title">LinkedIn</p>
+          <p class="resume-card-desc">Connect with me and see my professional network.</p>
+        </a>
+
+        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="resume-card">
+          <div class="resume-card-icon">
+            <!-- Download icon -->
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+          </div>
+          <p class="resume-card-title">Download PDF</p>
+          <p class="resume-card-desc">Save a copy of my resume to your device.</p>
+        </a>
+
       </div>
     </div>
   </section>
 
 
-  <!-- 6. CONTACT -->
+  <!-- 5. CONTACT -->
   <section class="contact" id="contact">
     <p class="label">Contact Me</p>
     <h2 class="heading">Let's work together</h2>
     <p class="contact-sub">Open to connecting with researchers, community organizations, and policy professionals.</p>
     <div class="contact-btns">
-      <a href="mailto:rkeschneider@gmail.com" class="btn btn-cream">Email Me</a>
-      <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      <a href="mailto:rkeschneider@gmail.com" class="btn btn-cream-solid">Email Me</a>
+      <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener" class="btn btn-outline" style="color:var(--cream);border-color:rgba(245,234,216,0.35);">LinkedIn</a>
     </div>
   </section>
 
@@ -738,8 +616,7 @@
     <nav aria-label="Footer">
       <ul class="footer-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#history">History</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
