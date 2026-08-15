@@ -93,6 +93,7 @@
     }
 
     .nav-brand {
+      display: none;
       font-family: 'Caprasimo', serif;
       font-size: 1.05rem;
       color: var(--cream);
@@ -489,6 +490,9 @@
       .about-photo { aspect-ratio: 4/3; max-height: 320px; }
       .about-flower { width: 60%; opacity: 0.15; }
       .footer { flex-direction: column; align-items: flex-start; }
+      .nav-brand { display: block; }
+      .top-nav { justify-content: space-between; }
+      .top-nav nav { position: absolute; }
       .nav-hamburger { display: flex; }
       .nav-links {
         display: none;
@@ -513,7 +517,7 @@
 
   <!-- TOP NAV -->
   <header class="top-nav">
-    <a class="nav-brand" href="home.html"></a>
+    <a class="nav-brand" href="home.html">Rachel Schneider</a>
     <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

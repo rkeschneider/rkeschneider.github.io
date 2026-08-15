@@ -205,6 +205,8 @@
     .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
     .footer-land { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--cream); opacity: 0.9; width: 100%; text-align: center; line-height: 1.65; font-style: italic; padding: 1.5rem 2rem; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
 
+    .nav-brand { display: none; font-family: 'Caprasimo', serif; font-size: 1.05rem; color: var(--cream); text-decoration: none; opacity: 0.92; }
+
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -220,6 +222,9 @@
     @media (max-width: 600px) {
       .contact-card { padding: 1.4rem 1.5rem; gap: 1.25rem; }
       .footer { flex-direction: column; align-items: flex-start; }
+      .nav-brand { display: block; }
+      .top-nav { justify-content: space-between; }
+      .top-nav nav { position: absolute; }
       .nav-hamburger { display: flex; }
       .nav-links {
         display: none;
@@ -244,6 +249,7 @@
 
   <!-- NAV -->
   <header class="top-nav">
+    <a class="nav-brand" href="home.html">Rachel Schneider</a>
     <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
