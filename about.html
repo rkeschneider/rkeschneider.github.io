@@ -4,135 +4,253 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Rachel Schneider</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --beige:       #d4cbb8;
+      --beige-deep:  #c3baaa;
+      --beige-light: #e2dbd0;
+      --slate:       #72919d;
+      --slate-dark:  #3f5760;
+      --slate-deep:  #2d3d45;
+      --olive:       #939c73;
+      --cream:       #f5ead8;
+      --radius:      18px;
+      --nav-h:       72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--beige-light);
+      color: var(--slate-deep);
+      font-family: 'Figtree', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Nav ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      height: var(--nav-h);
+    }
+    .nav-links { display: flex; gap: clamp(1.2rem, 3vw, 2.5rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .nav-links a:hover, .nav-links a[aria-current] { opacity: 1; }
+
+    /* ── Main layout ── */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - var(--nav-h));
+    }
+
+    /* ── Photo column ── */
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--slate-dark);
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    .about-flower {
+      position: absolute;
+      bottom: -6%;
+      right: -8%;
+      width: 65%;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Text column ── */
+    .about-text {
+      background: var(--cream);
+      padding: clamp(3rem, 7vw, 6rem) clamp(2rem, 5vw, 5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.9rem;
+    }
+    .about-text h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--slate-deep);
+      margin-bottom: 1.75rem;
+    }
+    .about-text p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--slate-dark);
+      opacity: 0.88;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p:last-of-type { margin-bottom: 2rem; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: var(--beige-light);
+      border: 1px solid rgba(63,87,96,0.15);
+      color: var(--slate-dark);
+    }
+    .tag-olive { background: rgba(147,156,115,0.15); border-color: rgba(147,156,115,0.3); color: var(--olive); }
+
+    /* ── CTA ── */
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.25rem;
+      padding: 0.75rem 1.6rem;
+      background: var(--slate-dark);
+      color: var(--cream);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: opacity 0.18s, transform 0.18s;
+    }
+    .about-cta:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--slate-deep);
+      padding: 2.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      opacity: 0.8;
+    }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.4;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .footer-links a:hover { opacity: 0.9; }
+    .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
+
+    @media (max-width: 768px) {
+      main { grid-template-columns: 1fr; }
+      .about-photo { min-height: 55vw; max-height: 420px; }
+      .about-flower { width: 50%; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────── -->
-  <header class="site-header hero-mode" id="site-header">
-    <a class="brand" href="index.html">Rachel Schneider</a>
+  <!-- NAV -->
+  <header class="top-nav">
     <nav aria-label="Main">
-      <ul class="site-nav" id="site-nav">
-        <li><a href="index.html">Home</a></li>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
         <li><a href="about.html" aria-current="page">About</a></li>
-        <li><a href="work.html">Work</a></li>
         <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <svg width="22" height="16" viewBox="0 0 22 16" fill="currentColor" aria-hidden="true">
-        <rect width="22" height="2" rx="1"/>
-        <rect y="7" width="22" height="2" rx="1"/>
-        <rect y="14" width="22" height="2" rx="1"/>
-      </svg>
-    </button>
   </header>
 
-  <!-- ── Page Header ────────────────────────────────────── -->
-  <div class="page-header">
-    <div class="page-header-content">
-      <h1>About Me</h1>
-      <p class="sub">Policy Analyst &amp; Researcher · Victoria, BC</p>
+  <main>
+
+    <!-- PHOTO -->
+    <div class="about-photo">
+      <img src="assets/Headshots/Rachel-Headshots-11.jpg" alt="Rachel Schneider">
+      <img class="about-flower" src="assets/Yellow-flower.png" alt="" aria-hidden="true">
     </div>
-  </div>
 
-  <!-- ── Bio ────────────────────────────────────────────── -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="bio-layout">
+    <!-- TEXT -->
+    <div class="about-text">
+      <p class="label">About Me</p>
+      <h1>Rachel Schneider</h1>
 
-        <div class="bio-text">
-          <p class="section-eyebrow">Background</p>
-          <h2 class="section-heading">Research at the intersection of policy, people, and place</h2>
-          <hr class="section-rule">
+      <p>I am a Master of Arts graduate with a passion for community, equity, and proactive change. Born and raised in Calgary, Alberta, I earned a Bachelor of Arts from the University of British Columbia (UBC) in 2017.</p>
+      <p>Driven by a desire to advocate for policies that increase the well-being of the underprivileged and underserved, I graduated from the University of Victoria in 2024 with a Master's in Cultural, Social and Political Thought.</p>
+      <p>I have dedicated much of my free time to my community. While attending UBC, I founded a debate club at Eric Hamber Secondary, a public high school in Vancouver. Over five years, I dedicated weekends and evenings to debate practice and tournaments, training 17 students to build their confidence and public-speaking skills. This experience, along with over 15 years of service, has developed an exceptional communication skillset, a calm demeanour, and the ability to engage thoughtfully on a wide array of topics.</p>
+      <p>Since graduating with my Master's, I have worked closely with people facing housing and food insecurity. As a Rotarian with the Rotary Club of Victoria Harbourside, I make breakfast weekly at Central Middle School and help deliver groceries monthly in our Food for Seniors program. In the summer of 2026, I was elected as the Chair of the Youth Committee at my Rotary club. In this role, I oversee and administer the scholarship and international exchange programs sponsored, in part, by my Rotary Club.</p>
+      <p>I am an incredibly kind, passionate, and detail-oriented individual with a proactive approach to problem-solving. Fluent in both French and English, I am committed to effecting positive change and am eager to contribute my skills to collaborative efforts.</p>
 
-          <p class="lead">Master of Arts graduate with hands-on experience conducting research and distilling complex data into accessible reports. Over three years assisting individuals experiencing homelessness or food insecurity through community-based volunteer roles.</p>
-
-          <p>Detail-oriented and fluent in English and French, I bring a proactive, problem-solving approach to everything I do. I'm motivated by advancing equitable, anti-colonial community development — translating dense legislative and policy frameworks into clear recommendations that serve real people.</p>
-
-          <p>My academic background in History and Cultural, Social, and Political Thought grounds my research in rigorous historical and theoretical analysis. My MA thesis — <em>"Expansion is too Clean a Name for it": Black Perspectives on the Spanish-Cuban-American and Philippines-American Wars</em> — synthesized over 2,000 historical newspaper articles to examine race, gender, and American imperial expansion at the turn of the twentieth century.</p>
-
-          <p>Beyond academia, I have spent years working directly with communities: coordinating large-scale service events for unhoused individuals, supporting seniors facing food insecurity, and producing policy research for the Alliance to End Homelessness in the Capital Region.</p>
-        </div>
-
-        <div>
-          <div class="sidebar-panel">
-            <h3>Core Competencies</h3>
-            <div class="tag-cloud">
-              <span class="tag tag-accent">Investigative Research</span>
-              <span class="tag tag-accent">Legislative Analysis</span>
-              <span class="tag tag-accent">Policy Analysis</span>
-              <span class="tag tag-accent-2">Stakeholder Engagement</span>
-              <span class="tag tag-accent-2">Report Writing</span>
-              <span class="tag tag-accent-2">Project Coordination</span>
-              <span class="tag tag-neutral">Records Management</span>
-              <span class="tag tag-neutral">Meeting Coordination</span>
-              <span class="tag tag-neutral">Public Communication</span>
-              <span class="tag tag-neutral">Dispute Resolution</span>
-              <span class="tag tag-neutral">Interviewing</span>
-              <span class="tag tag-neutral">Admin Coordination</span>
-            </div>
-          </div>
-
-          <div class="sidebar-panel">
-            <h3>Languages</h3>
-            <p>English — native<br>French — advanced</p>
-          </div>
-
-          <div class="sidebar-panel">
-            <h3>Education</h3>
-            <p style="margin-bottom: 0.75rem;"><strong>MA, History</strong><br>University of Victoria, 2019–2023<br><em style="font-size: 0.8rem; opacity: 0.75;">Concentration in Cultural, Social &amp; Political Thought</em></p>
-            <p><strong>BA, International Relations</strong><br>University of British Columbia, 2013–2017<br><em style="font-size: 0.8rem; opacity: 0.75;">Class I standing</em></p>
-          </div>
-
-          <div class="sidebar-panel">
-            <h3>Certifications</h3>
-            <p>Rotary Leadership Institute — Leadership Certificate (2025)<br>Teaching Assistant Consultant Training, UVic (2020)</p>
-          </div>
-        </div>
-
+      <div class="tags">
+        <span class="tag">Policy Analysis</span>
+        <span class="tag">Legislative Research</span>
+        <span class="tag">Report Writing</span>
+        <span class="tag">Stakeholder Engagement</span>
+        <span class="tag">English · French</span>
       </div>
-    </div>
-  </section>
 
-  <!-- ── Values ─────────────────────────────────────────── -->
-  <section class="section section--tinted">
-    <div class="section-inner">
-      <p class="section-eyebrow">What drives me</p>
-      <h2 class="section-heading">Values &amp; Approach</h2>
-      <hr class="section-rule">
-      <div class="values-grid">
-        <div class="card elev-sm">
-          <p class="card-kicker">Anti-colonial practice</p>
-          <p class="card-title">Equity-centred research</p>
-          <p class="card-body">I approach all research and policy work through an equity lens, centering the voices and experiences of those most affected by systemic inequities — including Indigenous, racialized, and otherwise marginalized communities.</p>
-        </div>
-        <div class="card elev-sm">
-          <p class="card-kicker">Clarity</p>
-          <p class="card-title">Making the complex accessible</p>
-          <p class="card-body">Effective research means nothing if it can't be understood by the people who need it most. I translate dense legislative and policy frameworks into clear, actionable language that drives real decisions.</p>
-        </div>
-        <div class="card elev-sm">
-          <p class="card-kicker">Community</p>
-          <p class="card-title">Grounded in service</p>
-          <p class="card-body">Over three years of direct community service — with unhoused individuals, seniors facing food insecurity, and youth — keeps my work grounded in lived reality rather than abstraction.</p>
-        </div>
-      </div>
+      <a href="contact.html" class="about-cta">Get in touch</a>
     </div>
-  </section>
 
-  <!-- ── Footer ─────────────────────────────────────────── -->
-  <footer class="site-footer">
+  </main>
+
+  <footer class="footer">
     <span class="footer-brand">Rachel Schneider</span>
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="work.html">Work</a>
-      <a href="resume.html">Resume</a>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-    <p class="footer-copy">Victoria, BC &nbsp;·&nbsp; <a href="mailto:rkeschneider@gmail.com">rkeschneider@gmail.com</a></p>
+    <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC</p>
   </footer>
 
-  <script src="js/main.js"></script>
 </body>
 </html>

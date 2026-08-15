@@ -4,75 +4,595 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume — Rachel Schneider</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --beige:       #d4cbb8;
+      --beige-deep:  #c3baaa;
+      --beige-light: #e2dbd0;
+      --slate:       #72919d;
+      --slate-dark:  #3f5760;
+      --slate-deep:  #2d3d45;
+      --olive:       #939c73;
+      --cream:       #f5ead8;
+      --radius:      14px;
+      --nav-h:       72px;
+      --max-w:       820px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--beige);
+      color: var(--slate-deep);
+      font-family: 'Figtree', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate-dark);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      height: var(--nav-h);
+    }
+    .nav-links { display: flex; gap: clamp(1.2rem, 3vw, 2.5rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .nav-links a:hover, .nav-links a[aria-current] { opacity: 1; }
+
+    /* ── Page layout ── */
+    .resume-page {
+      /* sections are full-width color blocks */
+    }
+
+    .resume-block {
+      padding: 3.5rem clamp(1.5rem, 10vw, 18rem);
+    }
+
+    @media (min-width: 1100px) {
+      .resume-block {
+        padding-left: max(3rem, calc((100vw - var(--max-w)) / 2));
+        padding-right: max(3rem, calc((100vw - var(--max-w)) / 2));
+      }
+    }
+
+    /* Alternating block colors */
+    .resume-block:nth-child(odd)  { background: var(--beige); }
+    .resume-block:nth-child(even) { background: var(--beige-light); }
+
+    /* Special overrides */
+    .resume-block--header { background: var(--cream); padding-bottom: 3rem; }
+    .resume-block--experience { background: var(--beige); }
+    .resume-block--extra { background: var(--beige-light); }
+    .resume-block--education { background: var(--cream); }
+    .resume-block--certs { background: var(--beige); }
+    .resume-block--languages { background: var(--beige-light); }
+    .resume-block--skills { background: var(--beige-deep); }
+    .resume-block--skills .section-title { color: var(--slate-dark); border-color: rgba(63,87,96,0.2); }
+    .resume-block--skills .skill-tag { background: var(--beige); border-color: rgba(63,87,96,0.18); color: var(--slate-dark); }
+
+    /* ── Page header ── */
+    .resume-header {
+      border-bottom: 2px solid var(--slate);
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+    .resume-header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.0;
+      color: var(--slate-deep);
+      margin-bottom: 0.75rem;
+    }
+    .resume-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--slate-dark);
+      opacity: 0.8;
+    }
+    .resume-contact a {
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .resume-contact a:hover { text-decoration: underline; }
+
+    /* ── Download button ── */
+    .resume-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding: 0.65rem 1.4rem;
+      background: var(--slate-dark);
+      color: var(--cream);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.18s, transform 0.18s;
+    }
+    .resume-download:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── Sections ── */
+    .resume-section { margin-bottom: 3rem; }
+
+    .section-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+      border-bottom: 1px solid var(--beige-deep);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── Summary ── */
+    .summary-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--slate-dark);
+      opacity: 0.88;
+    }
+
+    /* ── Experience entries ── */
+    .entry { margin-bottom: 2.25rem; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.2rem;
+    }
+    .entry-title {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--slate-deep);
+    }
+    .entry-dates {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--slate);
+      white-space: nowrap;
+    }
+    .entry-org {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--slate-dark);
+      margin-bottom: 0.75rem;
+    }
+    .entry-org a {
+      color: var(--slate);
+      text-decoration: none;
+    }
+    .entry-org a:hover { text-decoration: underline; }
+    .entry-org .location {
+      font-weight: 400;
+      opacity: 0.65;
+      margin-left: 0.5rem;
+    }
+
+    .entry-bullets {
+      list-style: none;
+      padding: 0;
+    }
+    .entry-bullets li {
+      position: relative;
+      padding-left: 1.2rem;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--slate-dark);
+      opacity: 0.85;
+      margin-bottom: 0.35rem;
+    }
+    .entry-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--slate);
+    }
+
+    /* ── Education ── */
+    .edu-entry { margin-bottom: 1.75rem; }
+    .edu-degree {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      color: var(--slate-deep);
+    }
+    .edu-school {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--slate-dark);
+      margin: 0.15rem 0 0.5rem;
+    }
+    .edu-school a { color: var(--slate); text-decoration: none; }
+    .edu-school a:hover { text-decoration: underline; }
+    .edu-details {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--slate-dark);
+      opacity: 0.8;
+    }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      background: var(--beige-light);
+      border: 1px solid rgba(63,87,96,0.15);
+      border-radius: 999px;
+      color: var(--slate-dark);
+      text-align: center;
+    }
+
+    /* ── Certs & Languages ── */
+    .simple-list {
+      list-style: none;
+      padding: 0;
+    }
+    .simple-list li {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--slate-dark);
+      opacity: 0.85;
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.25rem;
+    }
+    .simple-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--slate);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--slate-deep);
+      padding: 2.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      opacity: 0.8;
+    }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.4;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .footer-links a:hover { opacity: 0.9; }
+    .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
+
+    @media (max-width: 600px) {
+      .entry-header { flex-direction: column; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { gap: 1rem; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────── -->
-  <header class="site-header hero-mode" id="site-header">
-    <a class="brand" href="index.html">Rachel Schneider</a>
+  <!-- NAV -->
+  <header class="top-nav">
     <nav aria-label="Main">
-      <ul class="site-nav" id="site-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="work.html">Work</a></li>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html#about">About</a></li>
         <li><a href="resume.html" aria-current="page">Resume</a></li>
+        <li><a href="home.html#contact">Contact</a></li>
       </ul>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <svg width="22" height="16" viewBox="0 0 22 16" fill="currentColor" aria-hidden="true">
-        <rect width="22" height="2" rx="1"/>
-        <rect y="7" width="22" height="2" rx="1"/>
-        <rect y="14" width="22" height="2" rx="1"/>
-      </svg>
-    </button>
   </header>
 
-  <!-- ── Page Header ────────────────────────────────────── -->
-  <div class="page-header">
-    <div class="page-header-content">
-      <h1>Resume</h1>
-      <p class="sub">Professional Experience &amp; Education</p>
-    </div>
-  </div>
+  <main class="resume-page">
 
-  <!-- ── Resume embed ───────────────────────────────────── -->
-  <section class="section">
-    <div class="section-inner--wide">
-      <div class="resume-toolbar">
-        <div>
-          <p class="section-eyebrow" style="margin-bottom: 0.3rem;">Document</p>
-          <h2 class="section-heading" style="margin: 0; font-size: 1.5rem;">Rachel Schneider — Resume</h2>
-        </div>
-        <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="btn btn-primary">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0">
-            <path d="M7.5 10.5L3 6H6V1H9V6H12L7.5 10.5Z" fill="currentColor"/>
-            <path d="M2 12H13V14H2V12Z" fill="currentColor"/>
-          </svg>
-          Download PDF
-        </a>
+    <!-- HEADER -->
+    <div class="resume-block resume-block--header">
+    <div class="resume-header" style="border-bottom:none;padding-bottom:0;margin-bottom:0">
+      <h1>Rachel Schneider</h1>
+      <div class="resume-contact">
+        <span>Victoria, British Columbia</span>
+        <span>(403) 404-4471</span>
+        <a href="mailto:rkeschneider@gmail.com">rkeschneider@gmail.com</a>
+        <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener">linkedin.com/in/racheleschneider</a>
       </div>
-      <iframe
-        class="resume-embed"
-        src="assets/rachel-schneider-resume.pdf"
-        title="Rachel Schneider Resume"
-        aria-label="Resume PDF viewer">
-      </iframe>
+      <a href="assets/rachel-schneider-resume.pdf" download="Rachel_Schneider_Resume.pdf" class="resume-download">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        Download PDF
+      </a>
     </div>
-  </section>
+    </div><!-- /header block -->
 
-  <!-- ── Footer ─────────────────────────────────────────── -->
-  <footer class="site-footer">
+    <!-- SUMMARY -->
+    <div class="resume-block resume-block--summary">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Professional Summary</p>
+      <p class="summary-text">Master's-trained investigative researcher with seven years of combined professional, academic, and community-based experience spanning policy and legal research, administration, records management, collaborative programming, and stakeholder communication. Author of a multi-jurisdictional policy report for the Alliance to End Homelessness in the Capital Region. Active community leader and board member with Project Reconnect and the Harbourside Rotary Club. Coordinated large-scale multi-stakeholder events (up to 350 participants), including catering and partnership programs with 11 restaurants for the Rotary District Conference. Over 15 years of experience in fast-paced, public-facing roles, recognized for building positive relationships with clients, coworkers, and community members through clear and courteous communication.</p>
+    </section>
+    </div><!-- /summary block -->
+
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <div class="resume-block resume-block--experience">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Professional Experience</p>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Chair, Youth Committee — Rotary Youth Exchange Program</span>
+          <span class="entry-dates">April 2026 – Present</span>
+        </div>
+        <p class="entry-org"><a href="https://www.rotary.org" target="_blank" rel="noopener">Rotary Club of Victoria Harbourside</a><span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Coordinate the Rotary Youth Exchange program at the club level, overseeing both inbound students hosted in Victoria and outbound students placed with partner clubs internationally.</li>
+          <li>Screen and select host families through written applications, criminal background checks, personal interviews, and home visits in accordance with Rotary Youth Protection standards.</li>
+          <li>Serve as the primary point of contact for host families, sending families, exchange students, and partner clubs, providing ongoing support, problem resolution, and program guidance.</li>
+          <li>Source household items for host families; oversee insurance, documentation, and pre-departure preparation for outbound students.</li>
+          <li>Chair monthly committee meetings, set agendas, and document decisions and follow-up actions.</li>
+          <li>Liaise with the Rotary District 5020 Youth Exchange Committee on program compliance, training requirements, and reporting.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Board Member & Project Coordinator</span>
+          <span class="entry-dates">August 2025 – Present</span>
+        </div>
+        <p class="entry-org"><a href="https://www.projectreconnect.ca" target="_blank" rel="noopener">Project Reconnect</a><span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Contribute to board governance and event planning for Project Reconnect, an annual community service event connecting hundreds of unhoused and precariously housed individuals with local support services (approximately 350 participants served in 2025).</li>
+          <li>Collaborate with board members and community partners to coordinate sponsorships and fundraising.</li>
+          <li>Developed and maintained collaborative, professional relationships with organizations that directly serve those facing housing insecurity and homelessness.</li>
+          <li>Developed a comprehensive volunteer handbook outlining volunteer roles, event logistics, safety procedures, contact information, and a venue map.</li>
+          <li>Co-organized volunteer recruitment, scheduling, and on-site coordination and communications.</li>
+          <li>Provided client services to individuals experiencing personal crises, housing insecurity, and diverse lived experiences.</li>
+          <li>Welcomed and briefed 17 volunteers on the day's schedule, safety and security measures, important faces to know, and each team's expected role for the day.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Rotarian</span>
+          <span class="entry-dates">September 2024 – Present</span>
+        </div>
+        <p class="entry-org"><a href="https://www.rotary.org" target="_blank" rel="noopener">Rotary Club of Victoria Harbourside</a><span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Serve on the International Services Committee, reviewing and approving international charity grant applications and supporting global service initiatives.</li>
+          <li>Provide monthly logistical support for grocery deliveries to seniors experiencing food insecurity.</li>
+          <li>Support club fundraising, grant writing, and community engagement events, contributing to event logistics and volunteer coordination.</li>
+          <li>Recognized at the year-end celebration for outstanding volunteerism and contributions as a new club member.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Community Projects & Research Assistant</span>
+          <span class="entry-dates">November 2024 – August 2025</span>
+        </div>
+        <p class="entry-org"><a href="https://www.alliancetoendhomelessness.ca" target="_blank" rel="noopener">Alliance to End Homelessness in the Capital Region (AEHCR)</a><span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Researched and authored the Regional Overview of Permitted Sheltering, a 60-page policy report examining the legal and regulatory frameworks governing temporary overnight sheltering in public spaces across 13 municipalities and 3 electoral areas of the Capital Regional District.</li>
+          <li>Referenced, interpreted, and applied complex legislative, policy, and regulatory frameworks spanning municipal, regional, provincial, and federal jurisdictions.</li>
+          <li>Gathered and compared conflicting legislation, bylaws, policies, and judicial decisions to identify inconsistencies and opportunities for improvement in public administration.</li>
+          <li>Concisely synthesized large volumes of legal and policy information into clear written recommendations for community stakeholders.</li>
+          <li>Analyzed and synthesized federal, provincial, and municipal legislation—including the BC Park Act, Motor Vehicle Act, Forest and Range Practices Act, and federal Controlled Access Zone Order—and relevant case law (<em>Victoria (City) v. Adams</em>, <em>Saanich (District) v. Brett</em>).</li>
+          <li>Supported the Seniors Advisory Committee project, identifying senior-serving spaces and contributing to work on elder abuse, isolation, and housing insecurity.</li>
+          <li>Coordinated and supported committee meetings, including agenda preparation, minute-taking, and follow-up tracking.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Administrative Assistant & Legal Aid</span>
+          <span class="entry-dates">November 2018 – August 2019</span>
+        </div>
+        <p class="entry-org">Higgerty Law<span class="location">Calgary, AB</span></p>
+        <ul class="entry-bullets">
+          <li>Maintained and managed the principal attorney's schedule and complex caseload through proactive communication and diligent coordination.</li>
+          <li>Maintained confidential legal records and managed sensitive client information while ensuring compliance with legal procedures.</li>
+          <li>Coordinated case documentation and monitored filing deadlines for multiple active matters.</li>
+          <li>Designed and implemented a digital archiving system, converting and indexing hundreds of case files into a keyword-coded, searchable database.</li>
+          <li>Prepared and maintained legal documentation, coordinated filings, and supported day-to-day office operations with close attention to detail.</li>
+        </ul>
+      </div>
+    </section>
+    </div><!-- /experience block -->
+
+    <!-- ADDITIONAL EXPERIENCE -->
+    <div class="resume-block resume-block--extra">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Additional Experience</p>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Server</span>
+          <span class="entry-dates">June 2023 – Present</span>
+        </div>
+        <p class="entry-org">Irish Times Pub<span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Provide high-quality customer service in one of Victoria's busiest pubs, managing multiple tables in a fast-paced, high-volume environment.</li>
+          <li>Built strong relationships with members of the public while managing competing priorities.</li>
+          <li>Recognized by coworkers, managers, and patrons for professionalism, attention to detail, and a positive, capable demeanour.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Teaching Assistant Consultant (TAC)</span>
+          <span class="entry-dates">September 2020 – August 2021</span>
+        </div>
+        <p class="entry-org"><a href="https://www.uvic.ca" target="_blank" rel="noopener">University of Victoria</a> – Learning and Teaching Support and Innovation<span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Delivered over eight hours of customized, discipline-specific workshops for graduate teaching assistants.</li>
+          <li>Provided one-on-one mentorship and academic support to 17 graduate teaching assistants.</li>
+          <li>Designed and facilitated seminars based on adult-learning principles and detailed instructional planning.</li>
+          <li>Authored a year-end report summarizing TA program outcomes, participant feedback, and recommendations for future TACs.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Teaching Assistant (TA)</span>
+          <span class="entry-dates">September 2019 – August 2020</span>
+        </div>
+        <p class="entry-org"><a href="https://www.uvic.ca" target="_blank" rel="noopener">University of Victoria</a> – Learning and Teaching Support and Innovation<span class="location">Victoria, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Led tutorials for four undergraduate history courses.</li>
+          <li>Encouraged student engagement through collective review, reflective questions, and direct engagement with lecture materials.</li>
+          <li>Marked midterms, essay questions, and finals with clear and direct commentary.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Teaching Assistant (TA)</span>
+          <span class="entry-dates">September 2017 – August 2018</span>
+        </div>
+        <p class="entry-org"><a href="https://langara.ca" target="_blank" rel="noopener">Langara College</a><span class="location">Vancouver, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Recruited by a former professor at UBC to serve as a TA.</li>
+          <li>Responsible for grading and evaluation of papers, midterms, and finals for over 200 students across five courses.</li>
+          <li>Clearly communicated academic feedback in accordance with a strict academic template.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Founder & Coach</span>
+          <span class="entry-dates">September 2013 – July 2018</span>
+        </div>
+        <p class="entry-org">Eric Hamber Debate Club<span class="location">Vancouver, BC</span></p>
+        <ul class="entry-bullets">
+          <li>Founded and managed a successful debate club for five years, overseeing operations, logistics, and outreach.</li>
+          <li>Organized interschool debate tournaments, securing school facilities, managing budgets, and coordinating volunteers and judges.</li>
+          <li>Successfully applied for a program grant from the Debate and Speech BC Foundation.</li>
+          <li>Mentored high school students in critical thinking, public speaking, and research.</li>
+        </ul>
+      </div>
+    </section>
+    </div><!-- /extra block -->
+
+    <!-- EDUCATION -->
+    <div class="resume-block resume-block--education">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Education</p>
+
+      <div class="edu-entry">
+        <p class="edu-degree">Master of Arts, History &nbsp;·&nbsp; 2019 – 2023</p>
+        <p class="edu-school"><a href="https://www.uvic.ca" target="_blank" rel="noopener">University of Victoria</a><span style="font-weight:400;opacity:0.65;margin-left:0.5rem">Victoria, BC</span></p>
+        <p class="edu-details">Thesis: <em>Black Perspectives on American Imperial Expansion, 1898–1902.</em> Conducted original qualitative research synthesizing more than 2,000 historical newspaper articles to examine competing political perspectives and public discourse. Concentration in Cultural, Social and Political Thought (CSPT).</p>
+      </div>
+
+      <div class="edu-entry">
+        <p class="edu-degree">Bachelor of Arts, International Relations &nbsp;·&nbsp; 2013 – 2017</p>
+        <p class="edu-school"><a href="https://www.ubc.ca" target="_blank" rel="noopener">University of British Columbia</a><span style="font-weight:400;opacity:0.65;margin-left:0.5rem">Vancouver, BC</span></p>
+        <p class="edu-details">Graduated with Class I standing.</p>
+      </div>
+    </section>
+    </div><!-- /education block -->
+
+    <!-- CERTIFICATIONS -->
+    <div class="resume-block resume-block--certs">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Professional Development & Certifications</p>
+      <ul class="simple-list">
+        <li>Rotary Leadership Institute – Leadership Certificate (2025)</li>
+        <li>Teaching Assistant Consultant Training – Learning and Teaching Support and Innovation, University of Victoria (2020)</li>
+      </ul>
+    </section>
+    </div><!-- /certs block -->
+
+    <!-- LANGUAGES -->
+    <div class="resume-block resume-block--languages">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Languages</p>
+      <ul class="simple-list">
+        <li>English – native</li>
+        <li>French – advanced</li>
+      </ul>
+    </section>
+    </div><!-- /languages block -->
+
+    <!-- CORE COMPETENCES -->
+    <div class="resume-block resume-block--skills">
+    <section class="resume-section" style="margin-bottom:0">
+      <p class="section-title">Core Competences</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Investigative Research</span>
+        <span class="skill-tag">Legislative & Policy Analysis</span>
+        <span class="skill-tag">Stakeholder Engagement</span>
+        <span class="skill-tag">Administrative Coordination</span>
+        <span class="skill-tag">Records & Information Management</span>
+        <span class="skill-tag">Report & Briefing Note Writing</span>
+        <span class="skill-tag">Meeting Coordination</span>
+        <span class="skill-tag">Public Communication</span>
+        <span class="skill-tag">Dispute Resolution</span>
+        <span class="skill-tag">Interviewing & Information Gathering</span>
+        <span class="skill-tag">Independent Decision-Making</span>
+        <span class="skill-tag">Project Coordination</span>
+      </div>
+    </section>
+    </div><!-- /skills block -->
+
+  </main>
+
+  <footer class="footer">
     <span class="footer-brand">Rachel Schneider</span>
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="work.html">Work</a>
-      <a href="resume.html">Resume</a>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="home.html#about">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="home.html#contact">Contact</a></li>
+      </ul>
     </nav>
-    <p class="footer-copy">Victoria, BC &nbsp;·&nbsp; <a href="mailto:rkeschneider@gmail.com">rkeschneider@gmail.com</a></p>
+    <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC · <a href="mailto:rkeschneider@gmail.com" style="color:inherit">rkeschneider@gmail.com</a></p>
   </footer>
 
-  <script src="js/main.js"></script>
 </body>
 </html>

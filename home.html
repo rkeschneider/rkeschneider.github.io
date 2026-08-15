@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rachel Schneider — Policy Analyst &amp; Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
 
     :root {
@@ -18,7 +18,7 @@
       --olive:       #939c73;
       --cream:       #f5ead8;
       --radius:      18px;
-      --nav-h:       62px;
+      --nav-h:       72px;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -84,7 +84,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--slate-dark);
+      background: var(--slate);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -119,92 +119,72 @@
 
 
     /* ══════════════════════════════════════════════════════
-       1. HERO
+       1. HERO — splash clone
        ══════════════════════════════════════════════════════ */
     .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - var(--nav-h));
-      background: var(--beige);
-      padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 5rem);
-      gap: clamp(2.5rem, 5vw, 5rem);
-      align-items: center;
       position: relative;
-      overflow: hidden;
-    }
-
-    /* Gold-flower watermark behind the composition */
-    .hero-flower {
-      position: absolute;
-      top: -10%;
-      left: -4%;
-      width: 60%;
-      height: 130%;
-      object-fit: contain;
-      object-position: top left;
-      opacity: 0.13;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .hero-copy {
+      min-height: calc(100vh - var(--nav-h));
+      background: var(--slate);
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      position: relative; /* sit above the flower */
-    }
-
-    .hero-photo-wrap {
-      display: flex;
-      justify-content: flex-start;
-      position: relative;
-    }
-
-    .hero-photo-card {
-      width: 100%;
-      max-width: 400px;
-      aspect-ratio: 3 / 4;
-      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 20px 56px rgba(45,61,69,0.18);
-      /* Shift left so the card tucks into the pocket of the name */
-      transform: translateX(-9%);
     }
-    .hero-photo-card img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 18%;
+
+    .hero-flower {
       display: block;
+      width: min(860px, 90vw, calc(88vh * 1.75));
+      pointer-events: none;
+      user-select: none;
+      position: relative;
+      z-index: 0;
+    }
+
+    .hero-name-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      text-align: center;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .hero-name {
-      font-family: 'Caprasimo', serif;
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 4.8vw, 3.6rem);
+      letter-spacing: 0.42em;
+      text-indent: 0.42em;
+      text-transform: uppercase;
+      color: #f0e8d6;
       line-height: 1.0;
-      color: var(--slate-deep);
-      margin-bottom: 1.5rem;
+      white-space: nowrap;
     }
 
-    .hero-tagline {
-      font-size: clamp(1rem, 1.5vw, 1.15rem);
-      line-height: 1.75;
-      color: var(--slate-dark);
-      opacity: 0.78;
-      max-width: 38ch;
-      margin-bottom: 2.5rem;
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(0.42rem, 1.35vw, 1rem);
+      letter-spacing: 0.3em;
+      text-indent: 0.3em;
+      text-transform: uppercase;
+      color: rgba(240,232,214,0.68);
+      margin-top: 0.6em;
+      white-space: nowrap;
     }
-
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 
     /* ══════════════════════════════════════════════════════
        2. ORGANIZATIONS
        ══════════════════════════════════════════════════════ */
     .orgs {
-      background: var(--slate-dark);
-      padding: 3.5rem clamp(2rem, 8vw, 6rem);
+      background: var(--beige-light);
+      padding: 5rem clamp(2rem, 8vw, 6rem);
     }
-    .orgs .label { color: rgba(245,234,216,0.55); text-align: center; margin-bottom: 2rem; }
+    .orgs .label { color: var(--slate); text-align: center; margin-bottom: 2rem; }
 
     .orgs-grid {
       display: flex;
@@ -214,25 +194,38 @@
     }
 
     .org-card {
-      background: rgba(245,234,216,0.08);
-      border: 1px solid rgba(245,234,216,0.18);
+      background: var(--beige);
+      border: 1px solid rgba(63,87,96,0.12);
       border-radius: var(--radius);
-      padding: 1.5rem 2rem;
+      padding: 2rem 2rem 1.75rem;
       text-decoration: none;
-      color: var(--cream);
+      color: var(--slate-deep);
       text-align: center;
       flex: 1;
       max-width: 300px;
-      transition: background 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .org-card:hover { background: rgba(245,234,216,0.15); transform: translateY(-3px); }
+    .org-card:hover { box-shadow: 0 8px 28px rgba(45,61,69,0.12); transform: translateY(-3px); }
+
+    .org-bubble {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.1rem;
+      color: var(--cream);
+    }
+    .org-bubble svg { width: 38px; height: 38px; }
 
     .org-name {
       font-family: 'Caprasimo', serif;
       font-size: 0.9rem;
       line-height: 1.35;
       margin-bottom: 0.5rem;
-      color: var(--cream);
+      color: var(--slate-deep);
     }
     .org-role {
       font-size: 0.68rem;
@@ -298,6 +291,19 @@
       margin-bottom: 1.1rem;
     }
 
+    .about-text p.about-tagline {
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      line-height: 1.8;
+      color: var(--cream);
+      opacity: 1;
+      background: var(--slate-dark);
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      margin-bottom: 0;
+    }
+
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -344,6 +350,8 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
+      /* Always stay horizontal — never stack */
+      min-width: 0;
     }
 
     .resume-card {
@@ -441,23 +449,15 @@
 
 
     /* ── Responsive ───────────────────────────────────────── */
-    @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 3rem 1.5rem;
-        gap: 2.5rem;
-      }
-      /* On mobile: photo first, then name below */
-      .hero { display: flex; flex-direction: column-reverse; }
-      .hero-photo-wrap { justify-content: center; }
-      .hero-photo-card { max-width: 280px; transform: none; }
-      .hero-flower { width: 90%; top: 0; left: -10%; opacity: 0.1; }
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-photos { height: 60vw; }
+      .hero-copy { padding: 2.5rem 1.5rem; }
       .orgs-grid { flex-wrap: wrap; }
       .org-card { min-width: 160px; }
       .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-photo { aspect-ratio: 4/3; max-height: 320px; }
       .about-flower { width: 60%; opacity: 0.15; }
-      .resume-cards { grid-template-columns: 1fr; }
       .footer { flex-direction: column; align-items: flex-start; }
       .nav-links { display: none; }
     }
@@ -468,12 +468,12 @@
 
   <!-- TOP NAV -->
   <header class="top-nav">
-    <a class="nav-brand" href="home.html">Rachel Schneider</a>
+    <a class="nav-brand" href="home.html"></a>
     <nav aria-label="Main">
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -481,22 +481,10 @@
 
   <!-- 1. HERO -->
   <section class="hero">
-    <!-- Gold-flower: low-opacity watermark behind the name -->
-    <img class="hero-flower" src="assets/Gold-flower.png" alt="" aria-hidden="true">
-    <!-- Name/copy LEFT column -->
-    <div class="hero-copy">
-      <h1 class="hero-name">Rachel<br>Schneider</h1>
-      <p class="hero-tagline">Policy analyst and researcher committed to translating complex frameworks into equitable, community-centred recommendations.</p>
-      <div class="hero-actions">
-        <a href="#resume" class="btn btn-slate">View Resume</a>
-        <a href="#about" class="btn btn-outline">About Me</a>
-      </div>
-    </div>
-    <!-- Photo RIGHT column, shifted left into the name's pocket -->
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-card">
-        <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
-      </div>
+    <img class="hero-flower" src="assets/background-flower.png" alt="" aria-hidden="true">
+    <div class="hero-name-block">
+      <p class="hero-name">Rachel Schneider</p>
+      <p class="hero-title">Policy Analyst &amp; Researcher</p>
     </div>
   </section>
 
@@ -507,16 +495,36 @@
     <div class="orgs-grid">
 
       <a class="org-card" href="https://www.alliancetoendhomelessness.ca" target="_blank" rel="noopener">
+        <div class="org-bubble">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5"/>
+            <path d="M5 8.5V20a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1V8.5"/>
+          </svg>
+        </div>
         <p class="org-name">Alliance to End Homelessness in the Capital Region</p>
         <p class="org-role">Community Projects &amp; Research Assistant</p>
       </a>
 
       <a class="org-card" href="https://www.projectreconnect.ca" target="_blank" rel="noopener">
+        <div class="org-bubble">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
         <p class="org-name">Project Reconnect</p>
         <p class="org-role">Board Member &amp; Project Coordinator</p>
       </a>
 
       <a class="org-card" href="https://www.rotary.org" target="_blank" rel="noopener">
+        <div class="org-bubble">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </div>
         <p class="org-name">Rotary Club of Victoria Harbourside</p>
         <p class="org-role">Chair, Youth Exchange Committee</p>
       </a>
@@ -527,25 +535,13 @@
 
   <!-- 3. ABOUT ME -->
   <section class="about" id="about">
-    <!-- Yellow-flower decoration: lower-right corner -->
     <img class="about-flower" src="assets/Yellow-flower.png" alt="" aria-hidden="true">
     <div class="about-inner">
       <div class="about-photo">
-        <img src="assets/ocean-view.jpg" alt="Pacific Northwest coastline">
+        <img src="assets/rachel-headshot.jpg" alt="Rachel Schneider">
       </div>
       <div class="about-text">
-        <p class="label">About Me</p>
-        <h2 class="heading">Research that serves real people</h2>
-        <p>I'm a policy analyst and researcher based in Victoria, BC, with an MA in History from the University of Victoria and a background in International Relations from UBC.</p>
-        <p>My work sits at the intersection of community need and policy — from a 60-page multi-jurisdictional sheltering report to graduate research synthesizing 2,000+ historical newspaper articles on race and American imperialism.</p>
-        <p>I'm drawn to equitable, anti-colonial work grounded in direct community engagement. Bilingual in English and French.</p>
-        <div class="tags">
-          <span class="tag">Policy Analysis</span>
-          <span class="tag">Legislative Research</span>
-          <span class="tag tag-olive">Report Writing</span>
-          <span class="tag tag-olive">Stakeholder Engagement</span>
-          <span class="tag">English · French</span>
-        </div>
+        <p class="about-tagline">Master of Arts graduate with hands-on experience conducting research and distilling complex data into accessible reports. Over three years assisting individuals experiencing homelessness or food insecurity through community-based volunteer roles.</p>
       </div>
     </div>
   </section>
@@ -554,8 +550,7 @@
   <!-- 4. RESUME & LINKS -->
   <section class="resume-section" id="resume">
     <div class="resume-inner">
-      <p class="label">Resume &amp; Links</p>
-      <h2 class="heading">Find my work</h2>
+      <h2 class="heading">Find My Work</h2>
       <p class="resume-sub">View my full professional history, connect on LinkedIn, or download a copy of my resume.</p>
 
       <div class="resume-cards">
@@ -599,13 +594,11 @@
 
 
   <!-- 5. CONTACT -->
-  <section class="contact" id="contact">
+  <section class="contact">
     <p class="label">Contact Me</p>
     <h2 class="heading">Let's work together</h2>
-    <p class="contact-sub">Open to connecting with researchers, community organizations, and policy professionals.</p>
     <div class="contact-btns">
-      <a href="mailto:rkeschneider@gmail.com" class="btn btn-cream-solid">Email Me</a>
-      <a href="https://linkedin.com/in/racheleschneider" target="_blank" rel="noopener" class="btn btn-outline" style="color:var(--cream);border-color:rgba(245,234,216,0.35);">LinkedIn</a>
+      <a href="contact.html" class="btn btn-cream-solid">Contact Me</a>
     </div>
   </section>
 
@@ -615,9 +608,9 @@
     <span class="footer-brand">Rachel Schneider</span>
     <nav aria-label="Footer">
       <ul class="footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC · <a href="mailto:rkeschneider@gmail.com" style="color:inherit">rkeschneider@gmail.com</a></p>
