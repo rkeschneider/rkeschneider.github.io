@@ -465,6 +465,19 @@
     .footer-land { font-size: 0.72rem; color: var(--cream); opacity: 0.35; width: 100%; text-align: center; line-height: 1.6; font-style: italic; }
 
 
+    /* ── Hamburger button ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
+
     /* ── Responsive ───────────────────────────────────────── */
     @media (max-width: 700px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -492,25 +505,6 @@
       .nav-links.open { display: flex; }
       .nav-links li { width: 100%; }
       .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 0.9rem; opacity: 0.85; border-bottom: 1px solid rgba(245,234,216,0.1); }
-    }
-
-    /* ── Hamburger button ── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--cream);
-      border-radius: 2px;
     }
 
   </style>

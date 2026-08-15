@@ -175,6 +175,18 @@
     .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
     .footer-land { font-size: 0.72rem; color: var(--cream); opacity: 0.35; width: 100%; text-align: center; line-height: 1.6; font-style: italic; }
 
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
+
     @media (max-width: 768px) {
       main { grid-template-columns: 1fr; }
       .about-photo { min-height: 55vw; max-height: 420px; }
@@ -198,17 +210,6 @@
       .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 0.9rem; opacity: 0.85; border-bottom: 1px solid rgba(245,234,216,0.1); }
     }
 
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
   </style>
 </head>
 <body>
