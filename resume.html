@@ -357,8 +357,11 @@
     @media (max-width: 600px) {
       .entry-header { flex-direction: column; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { gap: 1rem; }
+      .nav-links { gap: 0.9rem; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-links a { font-size: 0.68rem; }
       .footer { flex-direction: column; align-items: flex-start; }
+      .resume-header-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .resume-header-download { justify-content: flex-start; }
     }
   </style>
 </head>
