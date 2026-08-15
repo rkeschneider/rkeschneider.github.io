@@ -8,82 +8,55 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #3a5059;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      min-height: 100dvh;
+      background-color: #72919d;
+      background-image: url('assets/business-card.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       cursor: pointer;
       overflow: hidden;
     }
 
-    /* Subtle radial glow behind the card */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(114,145,157,0.35) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .card-wrap {
-      max-width: min(88vw, 700px);
-      width: 100%;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
-    }
-
-    .card-wrap img {
-      width: 100%;
-      display: block;
-      border-radius: 6px;
-      box-shadow:
-        0 2px 4px rgba(0,0,0,0.2),
-        0 12px 32px rgba(0,0,0,0.35),
-        0 40px 80px rgba(0,0,0,0.3);
-    }
-
-    .enter-hint {
-      margin-top: 2.75rem;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(245, 234, 216, 0.4);
-      animation:
-        rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both,
-        pulse 3s ease-in-out 2s infinite;
-      user-select: none;
-    }
-
-    /* Invisible full-screen link */
+    /* Full-screen link — clicking anywhere goes to home.html */
     .cover-link {
       position: fixed;
       inset: 0;
       z-index: 10;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 3rem;
+      text-decoration: none;
     }
 
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
+    .welcome {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(245, 234, 216, 0.75);
+      animation: fadein 2s ease 0.8s both, pulse 3s ease-in-out 3s infinite;
+      user-select: none;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50%       { opacity: 0.85; }
+      0%, 100% { opacity: 0.75; }
+      50%       { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <div class="card-wrap">
-    <img src="assets/business-card.jpeg" alt="Rachel Schneider — Policy Analyst & Researcher">
-  </div>
-  <p class="enter-hint">click anywhere to enter</p>
-
-  <a href="home.html" class="cover-link" aria-label="Enter site"></a>
+  <a href="home.html" class="cover-link" aria-label="Enter site">
+    <span class="welcome">WELCOME &mdash; CLICK TO ENTER</span>
+  </a>
 
 </body>
 </html>
