@@ -87,9 +87,13 @@
       background: var(--slate-dark);
       padding: 5rem clamp(2rem, 8vw, 8rem) 4.5rem;
       min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       position: relative;
       overflow: hidden;
-      text-align: center;
     }
     .page-hero-flower {
       position: absolute;
@@ -104,11 +108,10 @@
     .page-hero h1 {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 400;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      letter-spacing: 0.05em;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05;
       color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 1.1rem;
+      margin-bottom: 1rem;
       position: relative;
       z-index: 1;
     }
