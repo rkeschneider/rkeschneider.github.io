@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Rachel Schneider</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --beige:       #d4cbb8;
+      --beige-deep:  #c3baaa;
+      --beige-light: #e2dbd0;
+      --slate:       #72919d;
+      --slate-dark:  #3f5760;
+      --slate-deep:  #2d3d45;
+      --olive:       #939c73;
+      --cream:       #f5ead8;
+      --radius:      18px;
+      --nav-h:       72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--beige-light);
+      color: var(--slate-deep);
+      font-family: 'Figtree', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.9rem;
+    }
+
+    /* ── Nav ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      height: var(--nav-h);
+    }
+    .nav-brand { display: none; font-family: 'Caprasimo', serif; font-size: 1.05rem; color: var(--cream); text-decoration: none; opacity: 0.92; }
+    .nav-links { display: flex; gap: clamp(1.2rem, 3vw, 2.5rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .nav-links a:hover, .nav-links a[aria-current] { opacity: 1; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
+
+    /* ── Page hero ── */
+    .page-hero {
+      background: var(--slate);
+      padding: 5rem clamp(2rem, 8vw, 6rem) 4.5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero-flower {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      max-width: 800px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .page-hero .label { color: rgba(245,234,216,0.55); position: relative; z-index: 1; }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      letter-spacing: 0.05em;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-sub {
+      font-size: 1rem;
+      color: rgba(245,234,216,0.7);
+      max-width: 54ch;
+      margin: 0 auto;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Services grid ── */
+    .services-body {
+      flex: 1;
+      background: var(--cream);
+      padding: 5rem clamp(2rem, 8vw, 6rem);
+    }
+
+    .services-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: center;
+    }
+
+    .service-card {
+      background: var(--beige-light);
+      border: 1px solid rgba(63,87,96,0.12);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 1.75rem;
+      flex: 1 1 280px;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 28px rgba(45,61,69,0.11);
+      transform: translateY(-3px);
+    }
+
+    .service-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+    .service-card-icon svg { width: 24px; height: 24px; }
+
+    .service-card-title {
+      font-family: 'Caprasimo', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--slate-deep);
+      line-height: 1.3;
+    }
+
+    .service-tasks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .service-tasks li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--slate-dark);
+      opacity: 0.8;
+    }
+
+    .service-tasks li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--slate);
+      flex-shrink: 0;
+      margin-top: 0.48em;
+      opacity: 0.55;
+    }
+
+    .services-collab {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--slate-dark);
+      opacity: 0.65;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── CTA ── */
+    .services-cta {
+      background: var(--slate-dark);
+      padding: 4rem clamp(2rem, 8vw, 6rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .services-cta-flower {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140%;
+      max-width: 900px;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .services-cta .label { color: rgba(245,234,216,0.5); position: relative; z-index: 1; }
+    .services-cta h2 {
+      font-family: 'Caprasimo', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      max-width: 24ch;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .services-cta p {
+      font-size: 0.97rem;
+      color: rgba(245,234,216,0.65);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.7rem;
+      border-radius: 999px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .btn:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-cream { background: var(--cream); color: var(--slate-dark); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--slate-deep);
+      padding: 2.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-land { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--cream); opacity: 0.9; width: 100%; text-align: center; line-height: 1.65; font-style: italic; padding: 1.5rem 2rem; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; text-wrap: balance; }
+    .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .service-card { max-width: 100%; }
+      .nav-brand { display: block; }
+      .top-nav { justify-content: space-between; }
+      .top-nav nav { position: absolute; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        flex-direction: column;
+        background: var(--slate-dark);
+        padding: 0.5rem 0;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 0.9rem; opacity: 0.85; border-bottom: 1px solid rgba(245,234,216,0.1); }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="top-nav">
+    <a class="nav-brand" href="home.html">Rachel Schneider</a>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html" aria-current="page">Services</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <img class="page-hero-flower" src="assets/background-flower.png" alt="" aria-hidden="true">
+    <h1>Services</h1>
+  </section>
+
+
+  <!-- SERVICES GRID -->
+  <div class="services-body">
+    <div class="services-inner">
+      <div class="services-grid">
+
+        <!-- Research & Policy Analysis -->
+        <div class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <p class="service-card-title">Research &amp; Policy Analysis</p>
+          <ul class="service-tasks">
+            <li>Policy briefs and literature reviews</li>
+            <li>Needs assessments and community data reports</li>
+            <li>Environmental scans — mapping what other organizations or jurisdictions are doing on an issue</li>
+            <li>Tracking legislation, regulations, and funding developments</li>
+          </ul>
+        </div>
+
+        <!-- Writing & Editing -->
+        <div class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <p class="service-card-title">Writing &amp; Editing</p>
+          <ul class="service-tasks">
+            <li>Turning research into clear, public-facing reports</li>
+            <li>Editing and sharpening policy documents and funding narratives</li>
+            <li>Executive summaries and one-pagers for decision-makers</li>
+            <li>Stakeholder updates, newsletters, and advocacy communications</li>
+          </ul>
+        </div>
+
+        <!-- Data Analysis & Visualization -->
+        <div class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <p class="service-card-title">Data Analysis &amp; Visualization</p>
+          <ul class="service-tasks">
+            <li>Cleaning and organizing datasets</li>
+            <li>Building charts, graphs, and infographics</li>
+            <li>Designing and analyzing surveys</li>
+            <li>Translating numbers into plain-language findings</li>
+          </ul>
+        </div>
+
+        <!-- Presentations & Briefing Materials -->
+        <div class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <p class="service-card-title">Presentations &amp; Briefing Materials</p>
+          <ul class="service-tasks">
+            <li>Building slide decks from research or policy findings</li>
+            <li>Visual one-pagers for board meetings or public hearings</li>
+            <li>Talking points and scripts for public remarks</li>
+            <li>Summarizing long reports into decision-ready briefing documents</li>
+          </ul>
+        </div>
+
+        <!-- Project Support & Coordination -->
+        <div class="service-card">
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+          </div>
+          <p class="service-card-title">Project Support &amp; Coordination</p>
+          <ul class="service-tasks">
+            <li>Managing timelines and deliverable tracking across a team</li>
+            <li>Meeting notes and action item follow-up</li>
+            <li>Coordinating stakeholder feedback processes</li>
+            <li>Using AI tools to accelerate research, drafting, and synthesis</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- CTA -->
+  <section class="services-cta">
+    <img class="services-cta-flower" src="assets/background-flower.png" alt="" aria-hidden="true">
+    <p class="label">Get In Touch</p>
+    <h2>Let's work together</h2>
+    <p>Have a project in mind? I'd love to hear from you.</p>
+    <a href="contact.html" class="btn btn-cream">Contact Me</a>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-land">Living, learning, and caring<br>for the unceded and ancestral lands of the Songhees, Xwsepsum (lək̓ʷəŋən) & W̱SÁNEĆ (SENĆOŦEN) peoples.</p>
+    <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC · <a href="mailto:rkeschneider@gmail.com" style="color:inherit">rkeschneider@gmail.com</a></p>
+  </footer>
+
+  <script>
+    (function() {
+      var btn = document.querySelector('.nav-hamburger');
+      var nav = document.querySelector('.nav-links');
+      if (btn && nav) {
+        btn.addEventListener('click', function() {
+          var open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
