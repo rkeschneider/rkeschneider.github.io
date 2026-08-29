@@ -515,6 +515,27 @@
       .nav-links li { width: 100%; }
       .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 0.9rem; opacity: 0.85; border-bottom: 1px solid rgba(245,234,216,0.1); }
 
+      /* Find My Work: horizontal scrollable row on mobile */
+      .resume-section { padding: 4rem 0; }
+      .resume-inner { padding: 0 1.5rem; }
+      .resume-inner .heading,
+      .resume-sub { padding: 0 1.5rem; }
+      .resume-cards {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0.5rem 1.5rem 1.25rem;
+        grid-template-columns: unset;
+      }
+      .resume-card {
+        min-width: 200px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+
       /* Accessibility: minimum readable font sizes on mobile */
       .label            { font-size: 0.85rem; letter-spacing: 0.15em; }
       .btn              { font-size: 0.9rem; }
