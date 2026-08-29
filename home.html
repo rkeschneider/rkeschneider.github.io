@@ -379,8 +379,8 @@
     }
 
     .resume-card-icon {
-      width: 48px;
-      height: 48px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: var(--slate);
       display: flex;
@@ -389,6 +389,7 @@
       color: var(--cream);
       flex-shrink: 0;
     }
+    .resume-card-icon svg { width: 36px; height: 36px; }
 
     .resume-card-title {
       font-family: 'Caprasimo', serif;
@@ -530,6 +531,10 @@
       .footer-copy      { font-size: 0.82rem; }
     }
 
+  @media (max-width: 700px) {
+    .resume-cards { display: flex; flex-direction: column; overflow-x: unset; }
+    .resume-card { min-width: unset; flex-shrink: unset; scroll-snap-align: unset; width: 100%; max-width: 340px; margin: 0 auto; }
+  }
   </style>
 </head>
 <body>
