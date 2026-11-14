@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cities 1.5 — Rachel Schneider</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Cormorant+Garamond:wght@300;400&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --beige:       #d4cbb8;
+      --beige-deep:  #c3baaa;
+      --beige-light: #e2dbd0;
+      --slate:       #72919d;
+      --slate-dark:  #3f5760;
+      --slate-deep:  #2d3d45;
+      --olive:       #939c73;
+      --cream:       #f5ead8;
+      --radius:      18px;
+      --nav-h:       72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background: var(--beige-light);
+      color: var(--slate-deep);
+      font-family: 'Figtree', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--slate);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      height: var(--nav-h);
+    }
+    .nav-links { display: flex; gap: clamp(0.9rem, 2vw, 1.8rem); list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.18s;
+    }
+    .nav-links a:hover, .nav-links a[aria-current] { opacity: 1; }
+
+    /* ── Hero ── */
+    .c15-hero {
+      background: var(--slate-dark);
+      padding: 5rem clamp(2rem, 8vw, 8rem) 4.5rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .c15-hero .hero-flower {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 151%;
+      max-width: 972px;
+      opacity: 0.50;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .c15-hero .label, .c15-hero h1, .c15-hero p { position: relative; z-index: 1; }
+    .c15-hero .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,234,216,0.5);
+      margin-bottom: 1rem;
+    }
+    .c15-hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .c15-hero p {
+      font-size: 1rem;
+      color: rgba(245,234,216,0.65);
+      max-width: 44ch;
+      margin: 0 auto;
+    }
+
+    /* ── About strip ── */
+    .c15-about {
+      background: var(--beige);
+      padding: 3.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+    .c15-about .about-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .c15-about p {
+      font-size: 0.97rem;
+      color: var(--slate-deep);
+      max-width: 68ch;
+      line-height: 1.75;
+    }
+    .c15-about .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-top: 0.25rem;
+    }
+    .role-tag {
+      background: var(--slate-dark);
+      color: var(--cream);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+    }
+    .c15-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    .c15-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.18s, transform 0.18s;
+    }
+    .c15-btn:hover { opacity: 0.82; transform: translateY(-1px); }
+    .c15-btn--dark { background: var(--slate-dark); color: var(--cream); }
+    .c15-btn--outline {
+      background: transparent;
+      color: var(--slate-dark);
+      border: 1.5px solid rgba(63,87,96,0.4);
+    }
+    .c15-btn--outline:hover { border-color: var(--slate-dark); }
+
+    /* ── Episode grid ── */
+    .c15-episodes {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem clamp(1.5rem, 5vw, 3rem) 5rem;
+      width: 100%;
+    }
+    .episodes-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 2.25rem;
+      text-align: center;
+    }
+    .episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Episode card */
+    .ep-card {
+      background: var(--cream);
+      border: 1px solid rgba(63,87,96,0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(45,61,69,0.07);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .ep-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(45,61,69,0.13); }
+
+    .ep-artwork {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ep-body {
+      padding: 1.5rem 1.75rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0.6rem;
+    }
+    .ep-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .ep-title {
+      font-family: 'Caprasimo', serif;
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--slate-deep);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .ep-listen {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--slate-dark);
+      color: var(--cream);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.18s, transform 0.18s;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+    .ep-listen:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    /* Coming soon card */
+    .ep-card--soon {
+      background: var(--beige);
+      border: 1.5px dashed rgba(63,87,96,0.2);
+      box-shadow: none;
+    }
+    .ep-card--soon:hover { transform: none; box-shadow: none; }
+    .ep-artwork-soon {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--beige-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ep-artwork-soon svg { opacity: 0.25; }
+    .ep-card--soon .ep-num { opacity: 0.5; }
+    .ep-card--soon .ep-title { opacity: 0.4; font-style: italic; }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--slate-deep);
+      padding: 2.5rem clamp(2rem, 8vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--cream); opacity: 0.4; text-decoration: none; transition: opacity 0.18s;
+    }
+    .footer-links a:hover { opacity: 0.9; }
+    .footer-copy { font-size: 0.75rem; color: var(--cream); opacity: 0.25; width: 100%; }
+    .footer-land { font-size: clamp(0.85rem, 1.3vw, 1rem); color: var(--cream); opacity: 0.9; width: 100%; text-align: center; line-height: 1.55; font-style: italic; padding: 0.75rem 2rem; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; text-wrap: balance; }
+
+    .nav-brand { display: none; font-family: 'Caprasimo', serif; font-size: 1.05rem; color: var(--cream); text-decoration: none; opacity: 0.92; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
+
+    @media (max-width: 600px) {
+      .episodes-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; align-items: flex-start; }
+      .footer-land { font-size: 0.68rem; padding: 0.5rem 0.75rem; }
+      .nav-brand { display: block; }
+      .top-nav { justify-content: space-between; }
+      .top-nav nav { position: absolute; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        flex-direction: column;
+        background: var(--slate-dark);
+        padding: 0.5rem 0;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.9rem 1.5rem; font-size: 0.9rem; opacity: 0.85; border-bottom: 1px solid rgba(245,234,216,0.1); }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .episodes-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="top-nav">
+    <a class="nav-brand" href="home.html">Rachel Schneider</a>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="publications.html">Portfolio</a></li>
+        <li><a href="cities15.html" aria-current="page">Cities 1.5</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="c15-hero">
+    <img class="hero-flower" src="assets/background-flower.png" alt="" aria-hidden="true">
+    <p class="label">C40 Centre · Canada Miniseries</p>
+    <h1>Cities 1.5</h1>
+    <p>Junior Producer &amp; Episode Artist — a podcast on urban climate action from the world's leading city climate network.</p>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="c15-about">
+    <p class="about-label">About the show</p>
+    <p>Cities 1.5 is produced by the C40 Centre — the Think Tank for Cities and Climate — in collaboration with the University of Toronto Press and the <em>Journal of City Climate Policy and Economy</em>. The show features interviews with mayors, city practitioners, economists, scientists, and youth activists implementing urban climate action on the ground. It is listened to in nearly 2,900 cities across 140 countries and currently ranks in the top 20% of podcasts globally by download rate.</p>
+    <p>For the six-episode <strong>Canada miniseries</strong>, I serve as Junior Producer, supporting the full production lifecycle of each episode — from guest research and scriptwriting to production coordination, show notes, and file management. I also create all original episode artwork for the series, developed on iPad in collaboration with the producer.</p>
+    <div class="role-tags">
+      <span class="role-tag">Junior Producer</span>
+      <span class="role-tag">Episode Artist</span>
+      <span class="role-tag">August 2026 – Present</span>
+    </div>
+    <div class="c15-links">
+      <a href="https://cities1point5.buzzsprout.com/" target="_blank" rel="noopener" class="c15-btn c15-btn--dark">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Listen on Buzzsprout
+      </a>
+      <a href="https://www.c40.org/what-we-do/raising-climate-ambition/c40-centre/" target="_blank" rel="noopener" class="c15-btn c15-btn--outline">
+        About C40 Centre
+      </a>
+    </div>
+  </section>
+
+  <!-- EPISODES -->
+  <main class="c15-episodes">
+    <p class="episodes-label">Canada Miniseries — Episodes</p>
+    <div class="episodes-grid">
+
+      <!-- Episode 1 -->
+      <div class="ep-card">
+        <img class="ep-artwork" src="assets/cities15-ep1.jpg" alt="Episode 1 artwork: How did we get here?">
+        <div class="ep-body">
+          <p class="ep-num">Episode 1</p>
+          <p class="ep-title">How did we get here?</p>
+          <a href="https://cities1point5.buzzsprout.com/" target="_blank" rel="noopener" class="ep-listen">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Listen
+          </a>
+        </div>
+      </div>
+
+      <!-- Episode 2 -->
+      <div class="ep-card">
+        <img class="ep-artwork" src="assets/cities15-ep2.jpg" alt="Episode 2 artwork: Impact — Smoke, Flames & Fire">
+        <div class="ep-body">
+          <p class="ep-num">Episode 2</p>
+          <p class="ep-title">Impact: Smoke, Flames, &amp; Fire</p>
+          <a href="https://cities1point5.buzzsprout.com/" target="_blank" rel="noopener" class="ep-listen">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Listen
+          </a>
+        </div>
+      </div>
+
+      <!-- Episode 3 -->
+      <div class="ep-card">
+        <img class="ep-artwork" src="assets/cities15-ep3.jpg" alt="Episode 3 artwork: Impact — Deluge, Drought & Water">
+        <div class="ep-body">
+          <p class="ep-num">Episode 3</p>
+          <p class="ep-title">Impact: Deluge, Drought, &amp; Water</p>
+          <a href="https://cities1point5.buzzsprout.com/" target="_blank" rel="noopener" class="ep-listen">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Listen
+          </a>
+        </div>
+      </div>
+
+      <!-- Episodes 4–6: Coming Soon -->
+      <div class="ep-card ep-card--soon">
+        <div class="ep-artwork-soon">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
+          </svg>
+        </div>
+        <div class="ep-body">
+          <p class="ep-num">Episode 4</p>
+          <p class="ep-title">Coming soon</p>
+        </div>
+      </div>
+
+      <div class="ep-card ep-card--soon">
+        <div class="ep-artwork-soon">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
+          </svg>
+        </div>
+        <div class="ep-body">
+          <p class="ep-num">Episode 5</p>
+          <p class="ep-title">Coming soon</p>
+        </div>
+      </div>
+
+      <div class="ep-card ep-card--soon">
+        <div class="ep-artwork-soon">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
+          </svg>
+        </div>
+        <div class="ep-body">
+          <p class="ep-num">Episode 6</p>
+          <p class="ep-title">Coming soon</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-land">Living, learning, and caring<br>for the unceded and ancestral lands of the Songhees, Xwsepsum (lək̓ʷəŋən) & W̱SÁNEĆ (SENĆOŦEN) peoples.</p>
+    <p class="footer-copy">© 2026 Rachel Schneider · Victoria, BC</p>
+  </footer>
+
+  <script>
+    (function() {
+      var btn = document.querySelector('.nav-hamburger');
+      var nav = document.querySelector('.nav-links');
+      if (btn && nav) {
+        btn.addEventListener('click', function() {
+          var open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
